@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+</head>
+<body>
+    <h1>Register for Cars</h1>
+    {% if registered %}
+    <strong>thank you for registering!</strong>
+    {% else %}
+    <strong>register here!</strong><br />
+
+    <form id="user_form" method="post" action="{% url 'cars:register' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+
+       <br /><div class ="mb-3">
+            <label class="inline-block mb-2">Username</label>
+            {{ user_form.username }}
+        </div></br>
+
+        <div class ="mb-3">
+            <label class="inline-block mb-2">Email</label>
+            {{ user_form.email }}
+        </div></br>
+
+        <div class ="mb-3">
+            <label class="inline-block mb-2">First name</label>
+            {{ user_form.first_name }}
+        </div></br>
+
+        <div class ="mb-3">
+            <label class="inline-block mb-2">Last name</label>
+            {{ user_form.last_name }}
+        </div></br>
+
+        <div class ="mb-3">
+            <label class="inline-block mb-2">Password</label>
+            {{ user_form.password1 }}
+        </div></br>
+
+        <div class ="mb-3">
+            <label class="inline-block mb-2">Retype password</label>
+            {{ user_form.password2 }}
+        </div></br>
+
+        {% if user_form.errors or user_form.non_field_errors %}
+            <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                {% for field in user_form %}
+                    {{ field.errors }}
+                {% endfor %}
+
+                {{ user_form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <input type="submit" name="submit" value="Register" />
+    </form>
+    {% endif %}
+</body> 
+</html>
