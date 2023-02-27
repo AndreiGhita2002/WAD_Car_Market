@@ -2,9 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>
+        {% block title_block %}
+            Car Trader
+        {% endblock %}
+    </title>
 </head>
 <body>
-    <p> Testing </p>
+<div>
+    {% block header_block %}
+        <h1>header block</h1>
+    {% endblock %}
+</div>
+<div>
+    {% block body_block %}
+        <p>body block</p>
+    {% endblock %}
+</div>
 </body>
 </html>
