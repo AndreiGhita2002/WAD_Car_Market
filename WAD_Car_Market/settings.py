@@ -70,7 +70,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [TEMPLATE_DIR, CORE_TEMPLATES, CARS_TEMPLATES, SEARCH_TEMPLATES, ACCOUNTS_TEMPLATES, MESSAGING_TEMPLATES],
-        'APP_DIRS': False,
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',

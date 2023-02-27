@@ -19,3 +19,5 @@ def register(request):
 
     return render(request, 'accounts/register.html', context = {'user_form': user_form, 'registered': registered})
     
+def profile(request):
+    return render(request, 'core/home.html', context = {})
