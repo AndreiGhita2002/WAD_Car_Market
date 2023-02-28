@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Password change</title>
+</head>
+<body>
+    <h1>Password change</h1>
+    <form id="Password_Change" method="post" action="{% url 'cars:settings' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input type="submit" name="submit" value="submit"/>
+    </form>
+</body> 
+</html>
