@@ -44,6 +44,9 @@ def profile(request):
     context = {'profile_form': profile_form, 'user_form': user_form}
     return render(request, 'accounts/profile.html', context)
 
+
+
+
 class PasswordChangeViews(PasswordChangeView):
     from_class = PasswordChangeForm
     success_url = reverse_lazy('home')
