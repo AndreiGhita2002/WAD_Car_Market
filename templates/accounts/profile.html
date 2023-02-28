@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile-{{ user.username }}</title>
+    <style>
+        .content{
+            text-align: center;
+        }
+
+        .profile-pic{
+            max-width: 200px;
+            max-height:200px;
+            border-radius: 50%;
+            overflow: hidden;
+            height:100%;
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="image">
+            <img class="profile-pic" src="{{ user.userprofile.profilePicture.url }}">
+        </div>
+        <div class="image body">
+                <h2 class="heading-username">{{ user.username }}</h2>
+        </br>
+                <h2 class="heading-email">{{ user.email }}</h2>
+        </br></br>
+        </div>
+        <div class="settings">
+            <form id="user_form" method="post" action="{% url 'cars:profile' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <br /><div class ="mb-3">
+                    <label class="inline-block mb-2">Address:</label>
+                    {{ profile_form.address }}
+                </div></br>
+    
+                 <div class ="mb-3">
+                    <label class="inline-block mb-2">Profile Picture: </label>
+                    {{ profile_form.profilePicture }}
+                </div></br>
+
+                <div class ="mb-3">
+                    <label class="inline-block mb-2">Username: </label>
+                    {{ user_form.username }}
+                </div></br>
+
+                <div class ="mb-3">
+                    <label class="inline-block mb-2">email: </label>
+                    {{ user_form.email }}
+                </div></br>
+
+                {% if profile_form.errors or profile_form.non_field_errors %}
+                <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                    {% for field in profile_form %}
+                        {{ field.errors }}
+                    {% endfor %}
+    
+                    {{ profile_form.non_field_errors }}
+                </div>
+                {% endif %}
+
+                {% if user_form.errors or user_form.non_field_errors %}
+                <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                    {% for field in user_form %}
+                        {{ field.errors }}
+                    {% endfor %}
+    
+                    {{ user_form.non_field_errors }}
+                </div>
+                {% endif %}
+
+                <input type="submit" name="submit" value="submit" />
+            </form>
+        </div>
+    </div>
+</body>
