@@ -59,21 +59,20 @@ class Car(models.Model):
         ),
 
         'mercedes_benz': (
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
+            ('a_class', 'a Class'),
+            ('c_class', 'c Class'),
+            ('e_class', 'e Class'),
+            ('g_class', 'G Class'),
+            ('eqa', 'EQA'),
+            ('eqs', 'EQS'),
         ),
 
         'nissan': (
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
+            ('micra', 'Micra'),
+            ('leaf', 'Leaf'),
+            ('gtr', 'GT-R'),
+            ('juke', 'Juke'),
+            ('qashqai', 'Qashqai'),
         ),
 
         'porsche': (
