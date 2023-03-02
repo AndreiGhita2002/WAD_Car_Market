@@ -76,29 +76,26 @@ class Car(models.Model):
         ),
 
         'porsche': (
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
+            ('taycan', 'Taycan'),
+            ('panamera', 'Panamera'),
+            ('macan', 'Macan'),
+            ('cayman', 'Cayman'),
+            ('boxter', 'Boxter'),
         ),
 
         'tesla': (
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
+            ('model_3', 'Model 3'),
+            ('model_x', 'Model X'),
+            ('model_y', 'Model Y'),
+            ('model_s', 'Model S'),
         ),
 
         'toyota': (
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
+            ('yaris', 'Yaris'),
+            ('corolla', 'Corolla'),
+            ('chr', 'CH-R'),
+            ('camry', 'Camry'),
+            ('supra', 'Supra'),
             ('a3', 'A3'),
         ),
     }
@@ -126,49 +123,51 @@ class Car(models.Model):
     )
 
     GEARBOX = (
-        ('manual', 'Manual')
-        ('automatic', 'Automatic')
+        ('manual', 'Manual'),
+        ('automatic', 'Automatic'),
     )
 
     FUEL = (
-        ('diesel', 'Diesel')
-        ('petrol', 'Petrol')
-        ('electric', 'Electric')
+        ('diesel', 'Diesel'),
+        ('petrol', 'Petrol'),
+        ('electric', 'Electric'),
     )
 
     MANUFACTURED_IN = (
-        ('2018', '2018')
-        ('2019', '2019')
-        ('2020', '2020')
-        ('2021', '2021')
-        ('2022', '2022')
-        ('2023', '2023')
+        ('2018', '2018'),
+        ('2019', '2019'),
+        ('2020', '2020'),
+        ('2021', '2021'),
+        ('2022', '2022'),
+        ('2023', '2023'),
     )
 
     COLOURS = (
-        ('white', 'White')
-        ('black', 'Black')
-        ('silver', 'Silver')
-        ('yellow', 'Yellow')
-        ('red', 'Red')
+        ('white', 'White'),
+        ('black', 'Black'),
+        ('silver', 'Silver'),
+        ('yellow', 'Yellow'),
+        ('red', 'Red'),
     )
 
-    unique_car_id = models.CharField(max_length=20, primary_key=True)
+    model_choices = tuple(tuple(value) for value in CAR_MODELS.values())
+
+    unique_car_id = models.CharField(max_length=6, primary_key=True)
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     price = models.PositiveIntegerField()
-    brand = models.CharField(choices=CAR_BRANDS)
-    model = models.CharField(choices="")
-    condition = models.CharField(choices=CONDITION)
+    brand = models.CharField(max_length=14, choices=CAR_BRANDS)
+    model = models.CharField(max_length=18)
+    condition = models.CharField(max_length=4, choices=CONDITION)
     description = models.TextField()
     date_posted = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='car_images/', blank=True)
     num_of_seats = models.PositiveIntegerField(choices=NUM_OF_SEATS)
-    body_type = models.CharField(choices=BODY_TYPES)
+    body_type = models.CharField(max_length=11, choices=BODY_TYPES)
     mileage = models.PositiveIntegerField()
-    gearbox = models.CharField(choices=GEARBOX)
-    fuel_type = models.CharField(choices=FUEL)
-    year_of_manufacture = models.CharField(choices=MANUFACTURED_IN)
-    colour = models.CharField(choices=COLOURS)
+    gearbox = models.CharField(max_length=9, choices=GEARBOX)
+    fuel_type = models.CharField(max_length=8, choices=FUEL)
+    year_of_manufacture = models.CharField(max_length=4, choices=MANUFACTURED_IN)
+    colour = models.CharField(max_length=6, choices=COLOURS)
     location = models.CharField(max_length=50)
 
     def __str__(self):
