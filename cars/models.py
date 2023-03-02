@@ -19,47 +19,43 @@ class Car(models.Model):
     CAR_MODELS = {
         'audi': (
             ('a3', 'A3'),
-            ('a4', 'A4'),
+            ('a4_avant', 'A4 Avant'),
+            ('q7', 'Q7'),
+            ('a6', 'A6'),
             ('a5', 'A5'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
+            ('e_tron', 'E-tron'),
         ),
 
         'bmw': (
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
+            ('1_series', '1 Series'),
+            ('3_series', '3 Series'),
+            ('4_series', '4 Series'),
+            ('5_series', '5 Series'),
+            ('x5', 'X5'),
+            ('ix3', 'IX3'),
         ),
 
         'ford': (
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
+            ('focus', 'Focus'),
+            ('puma', 'Puma'),
+            ('monedo', 'Monedo'),
+            ('mustang', 'Mustang'),
         ),
 
         'jaguar': (
+            ('xf', 'Xf'),
             ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
+            ('f_pace', 'F-pace'),
+            ('e_pace', 'I-pace'),
+            ('xe', 'XE'),
+            ('f_type', 'F-type'),
         ),
 
         'land_rover': (
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
-            ('a3', 'A3'),
+            ('range_rover_evoque', 'Range Rover Evoque'),
+            ('range_rover_velar', 'Range Rover Velar'),
+            ('range_rover', 'Range Rover'),
+            ('discovery', 'Discovery'),
         ),
 
         'mercedes_benz': (
@@ -130,6 +126,34 @@ class Car(models.Model):
         ('used', 'Used'),
     )
 
+    GEARBOX = (
+        ('manual', 'Manual')
+        ('automatic', 'Automatic')
+    )
+
+    FUEL = (
+        ('diesel', 'Diesel')
+        ('petrol', 'Petrol')
+        ('electric', 'Electric')
+    )
+
+    MANUFACTURED_IN = (
+        ('2018', '2018')
+        ('2019', '2019')
+        ('2020', '2020')
+        ('2021', '2021')
+        ('2022', '2022')
+        ('2023', '2023')
+    )
+
+    COLOURS = (
+        ('white', 'White')
+        ('black', 'Black')
+        ('silver', 'Silver')
+        ('yellow', 'Yellow')
+        ('red', 'Red')
+    )
+
     unique_car_id = models.CharField(max_length=20, primary_key=True)
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     price = models.PositiveIntegerField()
@@ -142,6 +166,11 @@ class Car(models.Model):
     num_of_seats = models.PositiveIntegerField(choices=NUM_OF_SEATS)
     body_type = models.CharField(choices=BODY_TYPES)
     mileage = models.PositiveIntegerField()
+    gearbox = models.CharField(choices=GEARBOX)
+    fuel_type = models.CharField(choices=FUEL)
+    year_of_manufacture = models.CharField(choices=MANUFACTURED_IN)
+    colour = models.CharField(choices=COLOURS)
+    location = models.CharField(max_length=50)
 
     def __str__(self):
         return self.unique_car_id
