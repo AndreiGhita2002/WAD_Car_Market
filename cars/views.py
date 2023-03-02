@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from cars.forms import CarListingForm
 
 
-def new_car_listing(request):
+def list_car(request):
     if request.method == 'POST':
         form = CarListingForm(request.POST, request.FILES)
         if form.is_valid():
@@ -29,4 +29,16 @@ def new_car(request):
 
 
 def used_car(request):
+    pass
+
+
+def show_saved(request):
+    pass
+
+
+def show_brands(request):
+    pass
+
+
+def show_electric(request):
     pass
