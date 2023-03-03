@@ -170,5 +170,10 @@ class Car(models.Model):
     colour = models.CharField(max_length=6, choices=COLOURS)
     location = models.CharField(max_length=50)
 
+    # field that sorting is based on
+    # TODO: add cookies and stuff to count how many views a car listing gets
+    #  maybe make it more advanced than just counting views
+    views = models.IntegerField(default=0)
+
     def __str__(self):
         return self.unique_car_id
