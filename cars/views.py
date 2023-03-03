@@ -42,3 +42,7 @@ def show_brands(request):
 
 def show_electric(request):
     pass
+
+
+def saved(request):
+    pass
