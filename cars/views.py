@@ -24,25 +24,25 @@ def sell_car(request):
     pass
 
 
-def new_car(request):
-    pass
-
-
-def browse_cars(request):
+def browse(request, html_doc):  # browse helper function, used by browse_new() and browse_used()
     # TODO rn it only shows the first n cars; figure out a way to show cars between n and m?
     #  (depending on url maybe)
-    cars_to_show = Car.objects.order_by('-views')[:CARS_PER_PAGE]
+    cars_to_show = Car.objects.order_by('-views')[:CARS_PER_PAGE]  # default sort by popularity
     context_dir = {"carlist": cars_to_show}
-    return render(request, 'browse_cars.html', context=context_dir)
+    return render(request, html_doc, context=context_dir)
+
+
+def browse_new(request):
+    browse(request, 'new.html')
+
+
+def browse_used(request):
+    browse(request, 'used.html')
 
 
 def car_details(request):
     context_dir = {}
     return render(request, 'car_details.html', context=context_dir)
-
-
-def used_car(request):
-    pass
 
 
 def show_saved(request):

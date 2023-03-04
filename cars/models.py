@@ -150,6 +150,17 @@ class Car(models.Model):
         ('red', 'Red'),
     )
 
+    LOCATIONS = (
+        ('london', 'London'),
+        ('birmingham', 'Birmingham'),
+        ('manchester', 'Manchester'),
+        ('leeds', 'Leeds'),
+        ('liverpool', 'Liverpool'),
+        ('glasgow', 'Glasgow'),
+        ('edinburgh', 'Edinburgh'),
+        ('aberdeen', 'Aberdeen'),
+    )
+
     model_choices = tuple(tuple(value) for value in CAR_MODELS.values())
 
     unique_car_id = models.CharField(max_length=6, primary_key=True)
@@ -168,7 +179,7 @@ class Car(models.Model):
     fuel_type = models.CharField(max_length=8, choices=FUEL)
     year_of_manufacture = models.CharField(max_length=4, choices=MANUFACTURED_IN)
     colour = models.CharField(max_length=6, choices=COLOURS)
-    location = models.CharField(max_length=50)
+    location = models.CharField(max_length=10, choices=LOCATIONS)
 
     # field that sorting is based on
     # TODO: add cookies and stuff to count how many views a car listing gets
