@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'core',
     'accounts',
     'cars',
-    'search',
     'messaging',
 ]
 

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title_block %}
+    Sell Car
+{% endblock %}
+
+{% block body_block %}
+
+  <h1>Add Car</h1>
+  <form method="post">
+    {% csrf_token %}
+    <fieldset>
+      <legend>Basic info</legend>
+      {{ form.title }}
+      {{ form.condition }}
+    </fieldset>
+    <fieldset>
+      <legend>Price</legend>
+      {{ form.price }}
+    </fieldset>
+    <fieldset>
+      <legend>Vehicle information</legend>
+      {{ form.brand }}
+      {{ form.model }}
+      {{ form.year }}
+      {{ form.mileage }}
+      {{ form.body
+    </fieldset>
+    <fieldset>
+      <legend>Photos / video</legend>
+      {{ form.image}}
+    </fieldset>
+    <fieldset>
+      <legend>Location</legend>
+      {{ form.location}}
+    </fieldset>
+    <button type="submit">Submit</button>
+  </form>
+{% endblock %}
+
+
+

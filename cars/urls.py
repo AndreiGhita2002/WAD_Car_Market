@@ -11,9 +11,7 @@ app_name = 'cars'
 urlpatterns = [
     path('details/', views.car_details, name='car_details'),
     path('sell/', views.sell_car, name='sell_your_car'),
-    path('', views.browse_cars, name='cars'),
-    path('browse/', views.browse_cars, name='browse_cars'),
-    # path('sell_your_car/list_car', views.add_car, name='list_car'),
+    path('sell/add_car', views.add_car, name='add_car'),
     # path('saved/', views.saved, name='saved'),
 
     # these two should be made more dynamic (have them all call the same view)

@@ -161,13 +161,18 @@ class Car(models.Model):
         ('aberdeen', 'Aberdeen'),
     )
 
-    model_choices = tuple(tuple(value) for value in CAR_MODELS.values())
+    MODEL_CHOICES = CAR_MODELS['audi'] + CAR_MODELS['bmw'] + CAR_MODELS['ford'] + CAR_MODELS['jaguar'] + CAR_MODELS[
+        'land_rover'] + CAR_MODELS['mercedes_benz'] + CAR_MODELS['nissan'] + CAR_MODELS['porsche'] + CAR_MODELS[
+        'tesla'] + CAR_MODELS['toyota']
+
+    tuple(MODEL_CHOICES)
 
     unique_car_id = models.CharField(max_length=6, primary_key=True)
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=40)
     price = models.PositiveIntegerField()
     brand = models.CharField(max_length=14, choices=CAR_BRANDS)
-    model = models.CharField(max_length=18)
+    model = models.CharField(max_length=18, choices=MODEL_CHOICES)
     condition = models.CharField(max_length=4, choices=CONDITION)
     description = models.TextField()
     date_posted = models.DateTimeField(auto_now_add=True)
@@ -177,7 +182,7 @@ class Car(models.Model):
     mileage = models.PositiveIntegerField()
     gearbox = models.CharField(max_length=9, choices=GEARBOX)
     fuel_type = models.CharField(max_length=8, choices=FUEL)
-    year_of_manufacture = models.CharField(max_length=4, choices=MANUFACTURED_IN)
+    year = models.CharField(max_length=4, choices=MANUFACTURED_IN)
     colour = models.CharField(max_length=6, choices=COLOURS)
     location = models.CharField(max_length=10, choices=LOCATIONS)
 
