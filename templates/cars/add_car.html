@@ -5,6 +5,11 @@
     Sell Car
 {% endblock %}
 
+{% block style_block %}
+
+{% endblock %}
+
+
 {% block body_block %}
 
   <h1>Add Car</h1>
@@ -12,8 +17,13 @@
     {% csrf_token %}
     <fieldset>
       <legend>Basic info</legend>
-      {{ form.title }}
-      {{ form.condition }}
+      <div>
+        {{ form.title.label_tag }}<br>
+        {{ form.title }}<br>
+        {{ form.condition.label_tag }}<br>
+        {{ form.condition }}
+      </div>
+
     </fieldset>
     <fieldset>
       <legend>Price</legend>
@@ -21,19 +31,34 @@
     </fieldset>
     <fieldset>
       <legend>Vehicle information</legend>
-      {{ form.brand }}
-      {{ form.model }}
-      {{ form.year }}
-      {{ form.mileage }}
-      {{ form.body
+      {{ form.brand.label_tag }}<br>
+      {{ form.brand }}<br>
+      {{ form.model.label_tag }}<br>
+      {{ form.model }}<br>
+      {{ form.year.label_tag }}<br>
+      {{ form.year }}<br>
+      {{ form.mileage.label_tag }}<br>
+      {{ form.mileage }}<br>
+      {{ form.body_type.label_tag }}<br>
+      {{ form.body_type }}<br>
+      {{ form.fuel_type.label_tag }}<br>
+      {{ form.fuel_type }}<br>
+      {{ form.transmission.label_tag }}<br>
+      {{ form.transmission }}<br>
+      {{ form.colour.label_tag }}<br>
+      {{ form.colour }}<br>
+      {{ form.description.label_tag }}<br>
+      {{ form.description }}
     </fieldset>
     <fieldset>
       <legend>Photos / video</legend>
-      {{ form.image}}
+      {{ form.image.label_tag }}<br>
+      {{ form.image }}
     </fieldset>
     <fieldset>
       <legend>Location</legend>
-      {{ form.location}}
+      {{ form.location.label_tag }}<br>
+      {{ form.location }}
     </fieldset>
     <button type="submit">Submit</button>
   </form>

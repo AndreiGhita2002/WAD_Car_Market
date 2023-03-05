@@ -134,12 +134,12 @@ class Car(models.Model):
     )
 
     MANUFACTURED_IN = (
-        ('2018', '2018'),
-        ('2019', '2019'),
-        ('2020', '2020'),
-        ('2021', '2021'),
-        ('2022', '2022'),
         ('2023', '2023'),
+        ('2022', '2022'),
+        ('2021', '2021'),
+        ('2020', '2020'),
+        ('2019', '2019'),
+        ('2018', '2018'),
     )
 
     COLOURS = (
@@ -169,22 +169,22 @@ class Car(models.Model):
 
     unique_car_id = models.CharField(max_length=6, primary_key=True)
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=40)
-    price = models.PositiveIntegerField()
-    brand = models.CharField(max_length=14, choices=CAR_BRANDS)
-    model = models.CharField(max_length=18, choices=MODEL_CHOICES)
-    condition = models.CharField(max_length=4, choices=CONDITION)
-    description = models.TextField()
+    title = models.CharField(max_length=40, verbose_name="Title")
+    price = models.PositiveIntegerField(verbose_name="Price")
+    brand = models.CharField(max_length=14, choices=CAR_BRANDS, verbose_name="Brand")
+    model = models.CharField(max_length=18, choices=MODEL_CHOICES, verbose_name="Model")
+    condition = models.CharField(max_length=4, choices=CONDITION, verbose_name="Condition")
+    description = models.TextField(verbose_name="Description")
     date_posted = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='car_images/', blank=True)
-    num_of_seats = models.PositiveIntegerField(choices=NUM_OF_SEATS)
-    body_type = models.CharField(max_length=11, choices=BODY_TYPES)
-    mileage = models.PositiveIntegerField()
-    gearbox = models.CharField(max_length=9, choices=GEARBOX)
-    fuel_type = models.CharField(max_length=8, choices=FUEL)
-    year = models.CharField(max_length=4, choices=MANUFACTURED_IN)
-    colour = models.CharField(max_length=6, choices=COLOURS)
-    location = models.CharField(max_length=10, choices=LOCATIONS)
+    image = models.ImageField(upload_to='car_images/', blank=True, verbose_name="Photos / video")
+    num_of_seats = models.PositiveIntegerField(choices=NUM_OF_SEATS, verbose_name="Number of seats")
+    body_type = models.CharField(max_length=11, choices=BODY_TYPES, verbose_name="Body type")
+    mileage = models.PositiveIntegerField(verbose_name="Mileage")
+    transmission = models.CharField(max_length=9, choices=GEARBOX, verbose_name="Transmission")
+    fuel_type = models.CharField(max_length=8, choices=FUEL, verbose_name="Fuel type")
+    year = models.CharField(max_length=4, choices=MANUFACTURED_IN, verbose_name="Year")
+    colour = models.CharField(max_length=6, choices=COLOURS, verbose_name="Colour")
+    location = models.CharField(max_length=10, choices=LOCATIONS, verbose_name="Location")
 
     # field that sorting is based on
     # TODO: add cookies and stuff to count how many views a car listing gets
