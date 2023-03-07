@@ -1,33 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>
         {% block title_block %}
             Car Trader
         {% endblock %}
     </title>
-
     {% block style_block %}
+    <link rel="stylesheet" type="text/css" href="/static/styles/base.css">
     {% endblock %}
 </head>
 <body>
-<div>
+<div class="main">
     {% block header_block %}
-        <!-- TODO: add more stuff here!-->
+        <nav class="navbar">
+        <a class="navbar-brand" href="/">
+          <img src="static/images/tron_trader.PNG" class="logo">
+        </a>
         <ul>
             <li><a href="/">Index</a></li>
             <li><a href="cars/">Browse Cars</a></li>
-            <li><a href="contact_us/">Contact us</a></li>
-            <li><a href="contact_us/">About us</a></li>
-
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">About us</a></li>
         </ul>
+        {% if user.is_authenticated %}
+            <img class="base-profile-pic" src="{{ user.userprofile.profilePicture.url }}" onmouseover="toggleMenu()">
+            <div class="user-profile-dropdown" id="subMenu">
+                <div class="menu-dropdown">
+                    <div class="user-info">
+                        <img class="user-info-image" src="{{ user.userprofile.profilePicture.url }}">
+                        <h3>{{ user.username }}</h3>
+                    </div>
+                    <hr>
+
+                    <a href="accounts/profile" class="sub-class-profile">
+                        <img src="static/images/edit-picture-img.jpg">
+                        <p>Edit Profile</p>
+                        <span>></span>
+                    </a>
+                    <a href="accounts/settings" class="sub-class-profile">
+                        <img src="static/images/settings.webp">
+                        <p>Settings</p>
+                        <span>></span>
+                    </a>
+                    <a href="accounts/logout" class="sub-class-profile">
+                        <img src="static/images/logout.png">
+                        <p>logout</p>
+                        <span>></span>
+                    </a>
+                </div>
+            </div>
+        {% else %}
+            <a href="accounts/login/">Login</a>
+        {% endif %}
+
+    </nav>
     {% endblock %}
 </div>
-<div>
+<div class="body-block">
     {% block body_block %}
         <p>empty body block</p>
     {% endblock %}
 </div>
+
+
+<script>
+    let subMenu = document.getElementById("subMenu");
+    
+    function toggleMenu(){
+        subMenu.classList.toggle("open-menu")
+    }
+</script>
 </body>
 </html>

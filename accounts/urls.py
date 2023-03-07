@@ -4,7 +4,7 @@ from accounts import views
 from accounts.views import PasswordChangeViews
 from accounts.forms import UserLoginForm
 
-app_name = 'cars'
+app_name = 'accounts'
 
 urlpatterns = [
     path('register/', views.register, name='register'),

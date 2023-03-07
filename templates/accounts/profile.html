@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load staticfiles %}
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,7 +31,7 @@
         </br></br>
         </div>
         <div class="settings">
-            <form id="user_form" method="post" action="{% url 'cars:profile' %}" enctype="multipart/form-data">
+            <form id="user_form" method="post" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <br /><div class ="mb-3">
@@ -76,8 +76,8 @@
 
                 <input type="submit" name="submit" value="submit" />
             </form>
-            <a href="{% url 'cars:settings' %}">link text</a>
-            <a href="{% url 'cars:logout' %}">logout</a>
+            <a href="{% url 'accounts:settings' %}">link text</a>
+            <a href="{% url 'accounts:logout' %}">logout</a>
         </div>
     </div>
 </body>

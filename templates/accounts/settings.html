@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load staticfiles %}
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Password change</h1>
-    <form id="Password_Change" method="post" action="{% url 'cars:settings' %}" enctype="multipart/form-data">
+    <form id="Password_Change" method="post" action="{% url 'accounts:settings' %}" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
 

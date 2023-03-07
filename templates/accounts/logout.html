@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load staticfiles %}
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,5 +8,5 @@
 <body>
     <h1>You have been logged out</h1>
 </br>
-<a href="{% url 'cars:login' %}">Log in Again</a>
+<a href="{% url 'accounts:login' %}">Log in Again</a>
 </body>

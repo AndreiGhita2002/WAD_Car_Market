@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load staticfiles %}
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,7 @@
 <body>
     <h1>login for cars</h1>
 
-    <form id="user_form" method="post" action="{% url 'cars:login' %}" enctype="multipart/form-data">
+    <form id="user_form" method="post" action="{% url 'accounts:login' %}" enctype="multipart/form-data">
         {% csrf_token %}
 
        <br /><div class ="mb-3">
