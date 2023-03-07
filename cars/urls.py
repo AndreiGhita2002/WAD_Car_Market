@@ -11,10 +11,11 @@ app_name = 'cars'
 urlpatterns = [
     path('details/', views.car_details, name='car_details'),
     path('sell/', views.sell_car, name='sell_your_car'),
-    path('sell/add_car', views.add_car, name='add_car'),
+    path('sell/add_car', views.add_car, name='add_car'),  # what's different between this and 'sell' ??
     # path('saved/', views.saved, name='saved'),
 
-    # these two should be made more dynamic (have them all call the same view)
-    # path('used/', views.used_car, name='used'),
-    # path('new/', views.new_car, name='new'),
+    # all of these go call views.browse through wrapper functions:
+    path('', views.browse, name='cars_root'),
+    path('used/', views.browse_used, name='cars_used'),
+    path('new/', views.browse_new, name='cars_new'),
 ]
