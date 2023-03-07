@@ -2,10 +2,13 @@
 {% load static %}
 
 {% block body_block %}
-    <h1> browse cars </h1>
+    <h1> browse
+        {% if car_condition %}{{ car_condition }}{% endif %}
+        cars </h1>
+    <br>
     <p>most viewed/popular cars should be shown:</p>
     <br>
-{#    todo: redo this; rn it crashes#}
+{#    todo: fix this; rn it crashes#}
 {#    {% if carlist %}#}
 {#        <ul>#}
 {#            {% for car in carlist %}#}

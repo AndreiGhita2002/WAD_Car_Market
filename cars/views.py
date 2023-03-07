@@ -34,14 +34,19 @@ def browse(request, args=""):
         - /cars/used/ calls with args="condition:used"
         - if you are looking for new audi cars you call with args="condition:new,car_brand:audi"
     """
+    context_dir = {}
+    filtered_cars = Car.objects
 
     # basic condition check; this will be expanded
     filter_dict = get_filter_dict(args)
+    if filter_dict.get('condition', -1) != -1:
+        context_dir['car_condition'] = filter_dict['condition']
+        filtered_cars = filtered_cars.filter(condition__exact=filter_dict['condition'])
 
     # TODO rn it only shows the first n cars; figure out a way to show cars between n and m?
     #  (depending on url maybe)
-    cars_to_show = Car.objects.order_by('-views')[:CARS_PER_PAGE]  # default sort by popularity
-    context_dir = {"carlist": cars_to_show}
+    sorted_cars = filtered_cars.order_by('-views')[:CARS_PER_PAGE]  # default sort by popularity
+    context_dir['carlist'] = sorted_cars
 
     return render(request, 'browse.html', context=context_dir)
 
@@ -49,6 +54,7 @@ def browse(request, args=""):
 def car_details(request):
     # todo: write this
     context_dir = {}
+    # also todo: remember to increment view of the shown car (with cookies ideally)
     return render(request, 'car_details.html', context=context_dir)
 
 
