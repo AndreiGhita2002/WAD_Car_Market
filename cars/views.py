@@ -29,23 +29,20 @@ def browse(request, args=""):
     General view function for any page that shows multiple car listings on the page,
     like /cars/, /cars/used/, /cars/new/ etc.
 
-    :parameter 'args' decides what to filter car listings by
+    parameter args decides what to filter the car listings by
+
     for example:
         - /cars/used/ calls with args="condition:used"
         - if you are looking for new audi cars you call with args="condition:new,car_brand:audi"
+        - if you are looking for the 3rd page of searches do args="page:2" (counting starts at 0)
+        - all of these requirements can be combined with ','
     """
-    context_dir = {}
-    filtered_cars = Car.objects
-
-    # basic condition check; this will be expanded
     filter_dict = get_filter_dict(args)
-    if filter_dict.get('condition', -1) != -1:
-        context_dir['car_condition'] = filter_dict['condition']
-        filtered_cars = filtered_cars.filter(condition__exact=filter_dict['condition'])
+    filtered_cars, context_dir = filter_cars(Car.objects, filter_dict)
 
-    # TODO rn it only shows the first n cars; figure out a way to show cars between n and m?
-    #  (depending on url maybe)
-    sorted_cars = filtered_cars.order_by('-views')[:CARS_PER_PAGE]  # default sort by popularity
+    start = CARS_PER_PAGE * int(filter_dict['page'])
+    end = start + CARS_PER_PAGE
+    sorted_cars = filtered_cars.order_by('-views')[start:end]  # default sort by views
     context_dir['carlist'] = sorted_cars
 
     return render(request, 'browse.html', context=context_dir)
@@ -58,7 +55,7 @@ def car_details(request):
     return render(request, 'car_details.html', context=context_dir)
 
 
-# helper function for browse():
+# helper functions for browse():
 def get_filter_dict(filters):
     filter_dict, key, val, is_key = {}, "", "", True
     for c in filters:
@@ -73,7 +70,20 @@ def get_filter_dict(filters):
         else:
             val += c
     filter_dict[key] = val
+    if filter_dict.get('page', None) is None:
+        filter_dict['page'] = '0'
     return filter_dict
+
+
+def filter_cars(car_objects, filter_dict):
+    context_dir = {}
+    filtered_cars = Car.objects
+    # basic condition check; this will be expanded
+    # todo: expand this
+    if filter_dict.get('condition', -1) != -1:
+        context_dir['car_condition'] = filter_dict['condition']
+        filtered_cars = filtered_cars.filter(condition__exact=filter_dict['condition'])
+    return filtered_cars, context_dir
 
 
 # wrapper functions for browse():
