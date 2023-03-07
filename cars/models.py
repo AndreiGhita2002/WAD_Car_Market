@@ -1,5 +1,16 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+
+from cars import validators
+
+
+def get_model_choices(car_models):
+    out = []
+    for brand in car_models:
+        model = car_models.get(brand)
+        for t in model:
+            out.append(t)
+    return tuple(out)
 
 
 class Car(models.Model):
@@ -133,15 +144,6 @@ class Car(models.Model):
         ('electric', 'Electric'),
     )
 
-    MANUFACTURED_IN = (
-        ('2023', '2023'),
-        ('2022', '2022'),
-        ('2021', '2021'),
-        ('2020', '2020'),
-        ('2019', '2019'),
-        ('2018', '2018'),
-    )
-
     COLOURS = (
         ('white', 'White'),
         ('black', 'Black'),
@@ -161,35 +163,39 @@ class Car(models.Model):
         ('aberdeen', 'Aberdeen'),
     )
 
-    MODEL_CHOICES = CAR_MODELS['audi'] + CAR_MODELS['bmw'] + CAR_MODELS['ford'] + CAR_MODELS['jaguar'] + CAR_MODELS[
-        'land_rover'] + CAR_MODELS['mercedes_benz'] + CAR_MODELS['nissan'] + CAR_MODELS['porsche'] + CAR_MODELS[
-        'tesla'] + CAR_MODELS['toyota']
+    MODEL_CHOICES = get_model_choices(CAR_MODELS)
 
-    tuple(MODEL_CHOICES)
+    # todo: add more validators
 
-    unique_car_id = models.CharField(max_length=6, primary_key=True)
+    # backend values:
+    unique_car_id = models.AutoField(primary_key=True)
+
+    # sorting values:
+    # TODO: add cookies and stuff to count how many views a car listing gets
+    #  maybe make it more advanced than just counting views
+    views = models.IntegerField(default=0)
+
+    # trading values:
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=40, verbose_name="Title")
-    price = models.PositiveIntegerField(verbose_name="Price")
+    image = models.ImageField(upload_to='car_images/', blank=True, verbose_name="Photo")
+    price = models.DecimalField(verbose_name="Price", validators=[validators.is_positive],
+                                decimal_places=2, max_digits=10)
+    description = models.TextField(verbose_name="Description")
+    date_posted = models.DateTimeField(auto_now_add=True)
+    location = models.CharField(max_length=10, choices=LOCATIONS, verbose_name="Location")
+
+    # physical car values:
     brand = models.CharField(max_length=14, choices=CAR_BRANDS, verbose_name="Brand")
     model = models.CharField(max_length=18, choices=MODEL_CHOICES, verbose_name="Model")
     condition = models.CharField(max_length=4, choices=CONDITION, verbose_name="Condition")
-    description = models.TextField(verbose_name="Description")
-    date_posted = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='car_images/', blank=True, verbose_name="Photos / video")
     num_of_seats = models.PositiveIntegerField(choices=NUM_OF_SEATS, verbose_name="Number of seats")
     body_type = models.CharField(max_length=11, choices=BODY_TYPES, verbose_name="Body type")
     mileage = models.PositiveIntegerField(verbose_name="Mileage")
     transmission = models.CharField(max_length=9, choices=GEARBOX, verbose_name="Transmission")
     fuel_type = models.CharField(max_length=8, choices=FUEL, verbose_name="Fuel type")
-    year = models.CharField(max_length=4, choices=MANUFACTURED_IN, verbose_name="Year")
+    year = models.CharField(max_length=4, validators=[validators.is_valid_year], verbose_name="Year")
     colour = models.CharField(max_length=6, choices=COLOURS, verbose_name="Colour")
-    location = models.CharField(max_length=10, choices=LOCATIONS, verbose_name="Location")
-
-    # field that sorting is based on
-    # TODO: add cookies and stuff to count how many views a car listing gets
-    #  maybe make it more advanced than just counting views
-    views = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.unique_car_id
+        return "Car:{" + self.title + "," + self.unique_car_id.__str__() + "}"
