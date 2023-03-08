@@ -9,53 +9,49 @@
     </title>
     {% block style_block %}
     <link rel="stylesheet" type="text/css" href="/static/styles/base.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     {% endblock %}
 </head>
+
+
 <body>
-<div class="main">
     {% block header_block %}
-        <nav class="navbar">
-        <a class="navbar-brand" href="/">
-          <img src="static/images/tron_trader.PNG" class="logo">
-        </a>
-        <ul>
-            <li><a href="/">Index</a></li>
-            <li><a href="cars/">Browse Cars</a></li>
-            <li><a href="#">Contact us</a></li>
-            <li><a href="#">About us</a></li>
-        </ul>
-        {% if user.is_authenticated %}
-            <img class="base-profile-pic" src="{{ user.userprofile.profilePicture.url }}" onmouseover="toggleMenu()">
-            <div class="user-profile-dropdown" id="subMenu">
-                <div class="menu-dropdown">
-                    <div class="user-info">
-                        <img class="user-info-image" src="{{ user.userprofile.profilePicture.url }}">
-                        <h3>{{ user.username }}</h3>
-                    </div>
-                    <hr>
-
-                    <a href="accounts/profile" class="sub-class-profile">
-                        <img src="static/images/edit-picture-img.jpg">
-                        <p>Edit Profile</p>
-                        <span>></span>
-                    </a>
-                    <a href="accounts/settings" class="sub-class-profile">
-                        <img src="static/images/settings.webp">
-                        <p>Settings</p>
-                        <span>></span>
-                    </a>
-                    <a href="accounts/logout" class="sub-class-profile">
-                        <img src="static/images/logout.png">
-                        <p>logout</p>
-                        <span>></span>
-                    </a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"><img src="static/images/tron_trader.PNG" class="logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav mr">
+            <a class="nav-item nav-link active" href="/">Home </a>
+            <a class="nav-item nav-link active" href="#">Browse cars</a>
+            <a class="nav-item nav-link active" href="#">Contact us</a>
+            <a class="nav-item nav-link active" href="#">About us</a>
+          </div>
+          <div class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="base-profile-pic" src="{{ user.userprofile.profilePicture.url }}"> {{ user.username }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="accounts/profile"><img src="static/images/edit-picture-img.jpg" class="sub-class-profile"> Profile</a>
+                    <a class="dropdown-item" href="accounts/settings"><img src="static/images/settings.webp" class="sub-class-profile">Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="accounts/logout"><img src="static/images/logout.png" class="sub-class-profile">Logout</a>
                 </div>
-            </div>
-        {% else %}
-            <a href="accounts/login/">Login</a>
-        {% endif %}
-
+            </li>
+          {% else %}
+            <a class="nav-item nav-link active" href="accounts/login">Login </a>
+            <a class="nav-item nav-link active" href="accounts/register">Sign up</a>
+          {% endif %}
+          </div>
+        </div>
     </nav>
+    
     {% endblock %}
 </div>
 <div class="body-block">
@@ -65,12 +61,6 @@
 </div>
 
 
-<script>
-    let subMenu = document.getElementById("subMenu");
-    
-    function toggleMenu(){
-        subMenu.classList.toggle("open-menu")
-    }
-</script>
+
 </body>
 </html>
