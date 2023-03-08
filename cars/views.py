@@ -57,6 +57,8 @@ def car_details(request):
 
 # helper functions for browse():
 def get_filter_dict(filters):
+    if filters == "":
+        return {}
     filter_dict, key, val, is_key = {}, "", "", True
     for c in filters:
         if c == ':':
