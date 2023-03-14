@@ -1,10 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load static %}
 
-</body>
-</html>
+{% block title_block %}
+    {{ car.year }} {{ car.colour }} {{ car.brand }} {{ car.model }}
+{% endblock %}
+
+{% block style_block %}
+    <link rel="stylesheet" type="text/css" href="/static/styles/car-details.css">
+{% endblock %}
+
+{% block body_block %}
+    <h2>{{ title }}</h2>
+    <div class="car-details" style="float: left;">
+        <div class="car-image">
+            {% if image_url %}
+                <img src="{{ image_url }}" alt="image of the car">
+            {% endif %}
+        </div>
+        <div class="specifications-container">
+            <strong><h3>Specifications</h3></strong>
+             <ul class="specifications">
+                 <li><strong>Manufacturing Year:</strong> {{ car.year }}</li>
+                 <li><strong>Mileage:</strong> {{ car.mileage }}</li>
+                 <li><strong>Body Type:</strong> {{ car.body_type }}</li>
+                 <li><strong>Transmission:</strong> {{ car.transmission }}</li>
+                 <li><strong>Fuel Type:</strong> {{ car.fuel_type }}</li>
+                 <li><strong>Exterior Color:</strong> {{ car.colour }}</li>
+                 <li><strong>Seats:</strong> {{ car.num_of_seats }}</li>
+             </ul>
+        </div>
+        <div class="description-container">
+            <strong><h3>Seller's Description</h3></strong>
+            {{ car.description }}
+        </div>
+    </div>
+    <div class="trader" style="float: right;">
+        <p class="used-sticker">Used</p>
+        <h3> {{ car.price }}</h3>
+        <p> {{ car.mileage }}</p> <!-- add speedometer logo here-->
+        <p> {{ car.location }}</p> <!-- add location logo here-->
+        <div class="seller">
+            <!-- profile pic of the seller goes here-->
+            <!-- name of the seller goes here-->
+        </div>
+    </div>
+    <div class="related-cars">
+        <h2>You may be interested in</h2>
+    </div>
+
+{% endblock %}

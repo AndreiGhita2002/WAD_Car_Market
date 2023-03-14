@@ -48,11 +48,32 @@ def browse(request, args=""):
     return render(request, 'browse.html', context=context_dir)
 
 
-def car_details(request):
-    # todo: write this
-    context_dir = {}
+def car_details(request, car_id):
+
+    car = Car.objects.get(unique_car_id=car_id)
+
+    context_dict = {
+        'page_title': f'{car.year} {car.colour} {car.brand} {car.model}',
+        'seller': car.seller,
+        'car_title': car.title,
+        'price': car.price,
+        'image_url': car.image.url if car.image else None,
+        'description': car.description,
+        'date_posted': car.date_posted,
+        'location': car.location,
+        'brand': car.brand,
+        'model': car.model,
+        'condition': car.condition,
+        'num_of_seats': car.num_of_seats,
+        'body_type': car.body_type,
+        'mileage': car.mileage,
+        'transmission': car.transmission,
+        'fuel_type': car.fuel_type,
+        'year': car.year,
+        'colour': car.colour,
+    }
     # also todo: remember to increment view of the shown car (with cookies ideally)
-    return render(request, 'car_details.html', context=context_dir)
+    return render(request, 'car_details.html', context=context_dict)
 
 
 # helper functions for browse():
