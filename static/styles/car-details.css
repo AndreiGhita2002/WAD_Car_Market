@@ -1,0 +1,31 @@
+.specifications-container {
+    border: 5px solid #000000;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.description-container {
+    border: 5px solid #000000;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.used-sticker {
+  background-color: #0000FF;
+  border-radius: 10px;
+  color: white;
+  font-size: 18px;
+  padding: 2px 10px;
+  position: absolute;
+  text-align: center;
+}
+
+.message {
+  background-color: #0000FF;
+  border-radius: 8px;
+  color: white;
+  font-size: 18px;
+  padding: 14px 20px;
+  position: absolute;
+  text-align: center;
+}
