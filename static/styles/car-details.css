@@ -1,3 +1,7 @@
+body {
+  background-color: #111222;
+}
+
 .specifications-container {
     border: 5px solid #000000;
     margin-top: 20px;
@@ -21,7 +25,7 @@
 }
 
 .message {
-  background-color: #0000FF;
+  background-color: #5643CC;
   border-radius: 8px;
   color: white;
   font-size: 18px;
@@ -29,3 +33,64 @@
   position: absolute;
   text-align: center;
 }
+
+.related-cars {
+  margin-bottom: 25px;
+  margin-top: 50px;
+}
+
+.carousel {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.carousel-container {
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-item {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  flex: 0 0 calc((100% - 80px) / 3);
+  margin: 26px;
+  padding: 80px 22px;
+
+}
+
+.carousel-item img {
+  height: 50%;
+  max-width: 150;
+  object-fit: contain;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  font-size: 28px;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+}
+
+.carousel-button.prev {
+  color: white;
+  left: 0;
+}
+
+.carousel-button.next {
+  color: white;
+  right: 0;
+}
+
+.carousel-button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #fff;
+}
+
+

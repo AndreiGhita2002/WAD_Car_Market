@@ -45,7 +45,24 @@
         </div>
     </div>
     <div class="related-cars">
-        <h2>You may be interested in</h2>
+        <h2 style="text-align: center; color: white;">You may be interested in</h2>
+        <div class="carousel">
+            <div class="carousel-container">
+                {% for car in related_cars %}
+                 <div class="carousel-item">
+                     <img src="{{ car.image.url }}" alt="car image">
+                     <h4> {{ car.year }} </h4>
+                     <h3> {{ car.brand }} {{ car.model }} </h3>
+                     <h4> {{ car.price }} </h4>
+                     <h4> {{ car.location }}</h4>
+                 </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-button prev"> &#10094; </button>
+            <button class="carousel-button next"> &#10095; </button>
+        </div>
+    </div>
+
     </div>
 
 {% endblock %}
