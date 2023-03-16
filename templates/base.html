@@ -21,7 +21,7 @@
 <body>
     {% block header_block %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#"><img src="static/images/tron_trader.PNG" class="logo"></a>
+        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static '/images/tron_trader.PNG' %}" class="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -42,14 +42,14 @@
                     <img class="base-profile-pic" src="{{ user.userprofile.profilePicture.url }}"> {{ user.username }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="accounts/profile"><img src="static/images/edit-picture-img.jpg" class="sub-class-profile"> Profile</a>
-                    <a class="dropdown-item" href="accounts/settings"><img src="static/images/settings.webp" class="sub-class-profile">Settings</a>
+                    <a class="dropdown-item" href="{% url 'accounts:profile' %}"><img src="{% static '/images/edit-picture-img.jpg' %}" class="sub-class-profile"> Profile</a>
+                    <a class="dropdown-item" href="{% url 'accounts:settings' %}"><img src="{% static '/images/settings.webp' %}" class="sub-class-profile">Settings</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="accounts/logout"><img src="static/images/logout.png" class="sub-class-profile">Logout</a>
+                    <a class="dropdown-item" href="{% url 'accounts:logout' %}"><img src="{% static '/images/logout.png' %}" class="sub-class-profile">Logout</a>
                 </div>
             </li>
           {% else %}
-            <a class="nav-item nav-link active" href="accounts/register"><img class="base-profile-pic" src="/static/images/sign-in.png">Sign up</a>
+            <a class="nav-item nav-link active" href="{% url 'accounts:register' %}"><img class="base-profile-pic" src="{% static '/images/sign-in.png' %}">Sign up</a>
           {% endif %}
           </div>
         </div>

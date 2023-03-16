@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from accounts.forms import CreateUserForm, UpdateUserProfileForm, UpdateUserForm
+from accounts.forms import CreateUserForm, UpdateUserProfileForm, UpdateUserForm, UserProfileForm
 from accounts.models import UserProfile
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordChangeView
@@ -32,16 +32,19 @@ def profile(request):
     user = request.user
     user_form = UpdateUserForm(instance=user)
     profile_form = UpdateUserProfileForm(instance=user_profile)
+    picture_form = UserProfileForm(instance=user_profile)
 
     if request.method == 'POST':
         profile_form = UpdateUserProfileForm(request.POST, request.FILES,instance=user_profile)
+        picture_form = UserProfileForm(request.POST, request.FILES,instance=user_profile)
         user_form = UpdateUserForm(request.POST,instance=user)
 
-        if profile_form.is_valid() and user_form.is_valid():
+        if profile_form.is_valid() and user_form.is_valid() and picture_form.is_valid():
             profile_form.save()
+            picture_form.save()
             user_form.save()
 
-    context = {'profile_form': profile_form, 'user_form': user_form}
+    context = {'profile_form': profile_form, 'user_form': user_form, 'picture_form':picture_form}
     return render(request, 'accounts/profile.html', context)
 
 

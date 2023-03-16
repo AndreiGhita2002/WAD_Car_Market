@@ -23,7 +23,7 @@ class UpdateUserProfileForm(ModelForm):
     address = forms.CharField(max_length=100, required=True, widget=forms.TextInput(attrs={'placeholder': 'Your address',}))
     class Meta:
         model = UserProfile
-        fields = ('address', 'profilePicture')
+        fields = ('address',)
 
 class UpdateUserForm(ModelForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Your username',}))
@@ -31,3 +31,8 @@ class UpdateUserForm(ModelForm):
     class Meta:
         model = User
         fields = ('username', 'email')
+
+class UserProfileForm(ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('profilePicture',)
