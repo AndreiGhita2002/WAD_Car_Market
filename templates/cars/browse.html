@@ -6,23 +6,23 @@
      name the title of this page based on whatever the user is browsing
      for example:
         if user is browsing used cars then the title should be used
-        if they are browsing new audi cars then title should be brand new audi cars
--->
+        if they are browsing new audi cars then title should be brand new audi cars {% endblock %} -->
+
 {% block body_block %}
-    <h1> browse
-        {% if car_condition %}{{ car_condition }}{% endif %}
-        cars </h1>
+    <h1> BROWSE </h1>
     <br>
     <p>most viewed/popular cars should be shown:</p>
     <br>
-{#    todo: fix this; rn it crashes#}
-{#    {% if carlist %}#}
-{#        <ul>#}
-{#            {% for car in carlist %}#}
-{#                <li>{{ car.model }}</li>#}
-{#            {% endfor %}#}
-{#        </ul>#}
-{#    {% else %}#}
-{#        <strong>There are no car listings present.</strong>#}
-{#    {% endif %}#}
+    {% if cars %}
+        <ul>
+            {% for car in cars %}
+                <a href="{% url 'car_details' car_id=car.id %}">
+                <li>{{ car.brand }} {{ car.model }} </li>
+                <img src="{{ car.image.url }}">
+                </a>
+            {% endfor %}
+       </ul>
+    {% else %}
+       <strong> There are no car listings present. </strong>
+    {% endif %}
 {% endblock %}
