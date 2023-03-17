@@ -2,9 +2,6 @@ from django.shortcuts import render
 from accounts.forms import CreateUserForm, UpdateUserProfileForm, UpdateUserForm, UserProfileForm
 from accounts.models import UserProfile
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import PasswordChangeView
-from django.contrib.auth.forms import PasswordChangeForm
-from django.urls import reverse_lazy
 
 # Create your views here.
 def register(request):
@@ -40,17 +37,10 @@ def profile(request):
         user_form = UpdateUserForm(request.POST,instance=user)
 
         if profile_form.is_valid() and user_form.is_valid() and picture_form.is_valid():
-            print('valid')
             profile_form.save()
             picture_form.save()
             user_form.save()
-
+    
     context = {'profile_form': profile_form, 'user_form': user_form, 'picture_form':picture_form}
     return render(request, 'accounts/profile.html', context)
 
-
-
-
-class PasswordChangeViews(PasswordChangeView):
-    from_class = PasswordChangeForm
-    success_url = reverse_lazy('home')

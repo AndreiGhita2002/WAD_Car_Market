@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% load static %}
 
 {% block title_block %}
@@ -37,6 +38,7 @@
         <div class="col-md-9">
           <div class="tab-content">
 			<form id="user_form" method="post" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
+        {% csrf_token %}
             <div class="tab-pane fade active show" id="account-general">
 
               <div class="card-body media align-items-center">
@@ -52,22 +54,9 @@
 
               <div class="card-body">
 			  <div class="white-text">
-					{% csrf_token %}
-                  <label class="form-label">Username</label>
-                  {{ user_form.username }}
-                
-                  <label class="form-label">First Name</label>
-                  {{ user_form.first_name }}
-
-				 <label class="form-label">Last Name</label>
-				 {{ user_form.last_name }}
-				 
-				 <label class="form-label">address</label>
-				 {{ profile_form.address }}
-                
-                  <label class="form-label">E-mail</label>
-				  {{ user_form.email }}
-
+          {{  user_form|crispy }}
+          {{  profile_form|crispy }}
+          
 				  <div class="text-right mt-3">
 					<input type="submit" name="submit" value="submit" class="button-59"  />
 				  </div>
@@ -87,9 +76,4 @@
 <br>
 <br>
 </div>
-
-
-
-
-
 {% endblock %}

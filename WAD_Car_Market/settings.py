@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'accounts',
+    'crispy_forms',
+    'crispy_bootstrap4',
     'cars',
     'messaging',
 ]
@@ -136,3 +138,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
