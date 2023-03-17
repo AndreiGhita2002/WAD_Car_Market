@@ -18,31 +18,79 @@
 {% endblock %}
 
 {% block body_block %}
-<br>
-<div class="row">
-	<div class="col-md-3">
-		<div class="card card-body">
-			<a class="btn btn-warning" href="{% url 'home' %}"> &#8592; Back to Home</a>
-			<hr>
-			<h3 style="text-align: center">Account Settings</h3>
-			<hr>
-			<img class="profile-pic" src="{{ user.userprofile.profilePicture.url }}" >
-		
-		</div>
-	</div>
-	<div class="col-md-9">
-		<div class="card card-body">
-			
-			<form method="POST" action="" enctype="multipart/form-data" class="form-submit">
-				{% csrf_token %}
-				{{ profile_form|crispy }}
-                {{ user_form|crispy }}
-                {{ picture_form|crispy }}
-		
-			<input class="btn btn-primary" type="submit" name="Update Information">
+<div class="black">
+<div class="container light-style flex-grow-1 container-p-y">
+
+    <h4 class="font-weight-bold py-3 mb-4">
+	  <div class="h4-color">
+      Account settings
+	  </div>
+    </h4>
+
+    <div class="card overflow-hidden">
+      <div class="row no-gutters row-bordered row-border-light">
+        <div class="col-md-3 pt-0">
+          <div class="list-group list-group-flush account-settings-links">
+            <a class="list-group-item list-group-item-action active" href="{% url 'accounts:profile' %}">General</a>
+            <a class="list-group-item list-group-item-action" href="{% url 'accounts:settings' %}">Change password</a>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="tab-content">
+			<form id="user_form" method="post" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
+            <div class="tab-pane fade active show" id="account-general">
+
+              <div class="card-body media align-items-center">
+                <img src="{{ user.userprofile.profilePicture.url }}" alt="" class="d-block ui-w-80">
+				<div class="media-body ml-4">
+					<label class="btn btn-outline-primary">
+					  Upload new photo
+					  {{ picture_form.profilePicture }}
+					</label> &nbsp;
+				  </div>
+              </div>
+              <hr class="border-dark m-0">
+
+              <div class="card-body">
+			  <div class="white-text">
+					{% csrf_token %}
+                  <label class="form-label">Username</label>
+                  {{ user_form.username }}
+                
+                  <label class="form-label">First Name</label>
+                  {{ user_form.first_name }}
+
+				 <label class="form-label">Last Name</label>
+				 {{ user_form.last_name }}
+				 
+				 <label class="form-label">address</label>
+				 {{ profile_form.address }}
+                
+                  <label class="form-label">E-mail</label>
+				  {{ user_form.email }}
+
+				  <div class="text-right mt-3">
+					<input type="submit" name="submit" value="submit" class="button-36"  />
+				  </div>
+				</div>
+				</div>
+              </div>
 			</form>
-		</div>
-	</div>
+              </div>
+            </div>
+          </div>
+        </div>	
+	  </div>
+    </div>
 </div>
+</div>
+<div class="black">
+<br>
+<br>
+</div>
+
+
+
+
 
 {% endblock %}

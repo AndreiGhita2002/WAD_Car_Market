@@ -40,6 +40,7 @@ def profile(request):
         user_form = UpdateUserForm(request.POST,instance=user)
 
         if profile_form.is_valid() and user_form.is_valid() and picture_form.is_valid():
+            print('valid')
             profile_form.save()
             picture_form.save()
             user_form.save()
