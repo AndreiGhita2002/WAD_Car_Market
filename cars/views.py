@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from cars.forms import CarListingForm
 from cars.models import Car
@@ -20,19 +20,15 @@ def add_car(request):
         return render(request, 'add_car.html', {'form': form})
 
 
-def sell_car(request):
-    pass
-
-
 def browse(request, args=""):
     """
     General view function for any page that shows multiple car listings on the page,
-    like /cars/, /cars/used/, /cars/new/ etc.
+    like /cars/browse/, /cars/browse/used/, /cars/browse/new/ etc.
 
     parameter args decides what to filter the car listings by
 
     for example:
-        - /cars/used/ calls with args="condition:used"
+        - /cars/browse/used/ calls with args="condition:used"
         - if you are looking for new audi cars you call with args="condition:new,car_brand:audi"
         - if you are looking for the 3rd page of searches do args="page:2" (counting starts at 0)
         - all of these requirements can be combined with ','
@@ -50,7 +46,7 @@ def browse(request, args=""):
 
 def car_details(request, car_id):
 
-    car = Car.objects.get(unique_car_id=car_id)
+    car = get_object_or_404(Car, pk=car_id)
 
     context_dict = {
         'page_title': f'{car.year} {car.colour} {car.brand} {car.model}',
@@ -116,3 +112,9 @@ def browse_used(request):
 
 def browse_new(request):
     return browse(request, args='condition:new')
+
+
+def test_browse(request):
+    cars = Car.objects.all()
+    context_dict = {'cars': cars}
+    return render(request, 'browse.html', context=context_dict)

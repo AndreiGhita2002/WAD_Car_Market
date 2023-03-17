@@ -9,13 +9,12 @@ app_name = 'cars'
 #  uncomment them when you implement them
 
 urlpatterns = [
-    path('details/', views.car_details, name='car_details'),
-    path('sell/', views.sell_car, name='sell_your_car'),
-    path('sell/add_car', views.add_car, name='add_car'),  # what's different between this and 'sell' ??
+    path('details/<int:pk>', views.car_details, name='car_details'),
+    path('sell/', views.add_car, name='add_car'),
     # path('saved/', views.saved, name='saved'),
 
     # all of these go call views.browse through wrapper functions:
-    path('', views.browse, name='cars_root'),
+    path('browse/', views.test_browse, name='cars_root'),
     path('used/', views.browse_used, name='cars_used'),
     path('new/', views.browse_new, name='cars_new'),
 ]
