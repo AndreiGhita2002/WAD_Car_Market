@@ -9,7 +9,7 @@ app_name = 'cars'
 #  uncomment them when you implement them
 
 urlpatterns = [
-    path('details/<int:pk>', views.car_details, name='car_details'),
+    path('browse/details/<int:car_id>', views.car_details, name='car_details'),
     path('sell/', views.add_car, name='add_car'),
     # path('saved/', views.saved, name='saved'),
 

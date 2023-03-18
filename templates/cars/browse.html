@@ -16,7 +16,7 @@
     {% if cars %}
         <ul>
             {% for car in cars %}
-                <a href="{% url 'car_details' car_id=car.id %}">
+                <a href="{% url 'cars:car_details' car_id=car.unique_car_id %}">
                 <li>{{ car.brand }} {{ car.model }} </li>
                 <img src="{{ car.image.url }}">
                 </a>
