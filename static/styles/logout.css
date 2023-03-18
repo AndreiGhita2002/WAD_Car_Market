@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    color: #fff;
+    background: #111;
+    font-family: 'Poppins',sans-serif;
+}
+
+.container{
+    width: 100%;
+    min-height: 100vh;
+    backdrop-filter: blur(1px);
+    pointer-events: none;
+}
+.container section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px);
+    text-align: center;
+    pointer-events: none;
+}
+
+.textBox h1{
+    font-size: 5em;
+}
+
+.textBox p{
+    font-size: 3em;
+}
+
+.textBox .homeBtn{
+    font-family: 'Poppins';
+    padding: 8px 18px;
+    margin: 16px 12px;
+    font-size: 26px;
+    background-color: transparent;
+    color: var(--i);
+    outline: none;
+    border: 3px solid var(--i);
+    border-radius: 4px;
+    cursor: pointer;
+    pointer-events: all;
+    transition: .3s;
+    font-weight: 600;
+}
+
+.textBox .homeBtn a{
+    text-decoration: none;
+    color: white;
+}
+
+#white-button{
+    --i : #fff;
+}
+
+#blue-button{
+    --i : #00bfff;
+}
+
+#home{
+    color: mediumturquoise;
+}
+
+.textBox .homeBtn:hover{
+    background-color: var(--i);
+    color: #000;
+}
+
+.Animation{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(20,1fr);
+    grid-template-rows: repeat(20,1fr);
+    background: #1d1d1d;
+    filter: saturate(2);
+    overflow: hidden;
+}
+
+.colorBox{
+    z-index: 2;
+    filter: brightness(1.1);
+    transition: 2s ease;
+    position: relative;
+    margin: 2px;
+    background: #1d1d1d;
+}
+
+.colorBox:hover{
+    background: #00bfff;
+    transition-duration: 0s;
+}
+
+.backgroundFeature{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background:  linear-gradient(68.2deg, rgb(3, 126, 243) -0.3%, rgb(48, 195, 158) 100.2%);
+    filter: blur(50px);
+    animation: animBack 3s linear infinite;
+}
+
+@keyframes animBack {
+    0%{
+        top: -60px;
+    }
+    100%{
+        top: 120%;
+    }
+}

@@ -1,12 +1,23 @@
 <!DOCTYPE html>
-{% load static %}
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Log out</title>
-</head>
+    <title>Logout</title>
+    <link rel="stylesheet" href="/static/styles/logout.css">
+    </head>
 <body>
-    <h1>You have been logged out</h1>
-</br>
-<a href="{% url 'accounts:login' %}">Log in Again</a>
+    <div class="Animation" id="Animation">
+        <div class="backgroundFeature">
+        </div>
+    </div>
+    <div class="container">
+        <section>
+            <div class="textBox">
+                <h1>TronTrader</h1>
+                <p>You have succesfully logged out!</p>
+                <button class="homeBtn" id="white-button"><a href="{% url 'home' %}" id="home">back to home page</a></button>
+                <button class="homeBtn" id="blue-button"><a href="{% url 'accounts:login' %}">Log in again</a></button>
+            </div>
+        </section>
+    </div>
+    <script src="/static/javascript/logout.js"></script>
 </body>
+</html>
