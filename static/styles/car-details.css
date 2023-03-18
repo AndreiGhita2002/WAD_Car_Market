@@ -1,6 +1,13 @@
-body {
-  background-color: #111222;
+@import url("base.css");
+
+
+.body {
+    background-color: #FFFFFF;
 }
+
+/* body {
+  background-color: #111222;
+}  */
 
 .specifications-container {
     border: 5px solid #000000;
