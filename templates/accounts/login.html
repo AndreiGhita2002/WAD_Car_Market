@@ -1,42 +1,47 @@
-<!DOCTYPE html>
-{% load static %}
+<!-- i used this webiste to implement the code in both this and its the corresponding css file:https://codepen.io/fghty/pen/PojKNEG -->
+<!DOCTYPE html> {% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Log in</title>
-<!--    make this page look like the log in page-->
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/login.css' %}">
+    <script src="{% static 'scripts/login.js' %}" defer></script>
 </head>
+
 <body>
-    <h1>login for cars</h1>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <div class="form-container">
+        <h1>login for cars</h1>
 
-    <form id="user_form" method="post" action="{% url 'accounts:login' %}" enctype="multipart/form-data">
-        {% csrf_token %}
+        <form id="user_form" method="post" action="{% url 'accounts:login' %}" enctype="multipart/form-data">
+            {% csrf_token %}
 
-       <br /><div class ="mb-3">
-            <label class="inline-block mb-2">Username</label>
-            {{ form.username }}
-        </div></br>
-
-        <div class ="mb-3">
-            <label class="inline-block mb-2">Password</label>
-            {{ form.password }}
-        </div></br>
-
-        {% if form.errors or form.non_field_errors %}
-            <div class="mb-3 p-6 bg-red-100 rounded-xl">
-                {% for field in form %}
-                    {{ field.errors }}
-                {% endfor %}
-
-                {{ form.non_field_errors }}
+            <br />
+            <div class="mb-3">
+                <label class="inline-block mb-2">Username</label> {{ form.username }}
             </div>
-        {% endif %}
+            </br>
 
-        <input type="submit" name="submit" value="Login" />
-        <a href=# > forgot password?</a>
-    </form>
+            <div class="mb-3">
+                <label class="inline-block mb-2">Password</label> {{ form.password }}
+            </div>
+            </br>
 
-    <p> don't have an account? <a href="{% url 'accounts:register' %}" > sign up</a></p>
+            {% if form.errors or form.non_field_errors %}
+            <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                {% for field in form %} {{ field.errors }} {% endfor %} {{ form.non_field_errors }}
+            </div>
+            {% endif %}
+            <p> Register a new account? <a href="{% url 'accounts:register' %}"> sign up</a></p>
+            <input type="submit" name="submit" value="Login" />
+        </form>
 
-</body> 
+
+
+</body>
+
 </html>

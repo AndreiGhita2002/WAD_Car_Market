@@ -1,79 +1,68 @@
-{% extends "base.html" %}
-{% load crispy_forms_tags %}
-{% load static %}
-
-{% block title_block %}
-    Profile-{{ user.username }}
-{% endblock %}
-
-{% block style_block %}
+{% extends "base.html" %} {% load crispy_forms_tags %} {% load bootstrap4 %} {% load static %} {% block title_block %} Profile-{{ user.username }} {% endblock %} {% block style_block %}
 <link rel="stylesheet" type="text/css" href="/static/styles/base.css">
 <link rel="stylesheet" type="text/css" href="/static/styles/profile.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-{% endblock %}
-
-{% block body_block %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"> {% endblock %} {% block body_block %}
 <div class="black">
-<div class="container light-style flex-grow-1 container-p-y">
+    <div class="container light-style flex-grow-1 container-p-y">
 
-    <h4 class="font-weight-bold py-3 mb-4">
-	  <div class="h4-color">
-      Account settings
-	  </div>
-    </h4>
+        <h4 class="font-weight-bold py-3 mb-4">
+            <div class="h4-color">
+                Account settings
+            </div>
+        </h4>
 
-    <div class="card overflow-hidden">
-      <div class="row no-gutters row-bordered row-border-light">
-        <div class="col-md-3 pt-0">
-          <div class="list-group list-group-flush account-settings-links">
-            <a class="list-group-item list-group-item-action active" href="{% url 'accounts:profile' %}">General</a>
-            <a class="list-group-item list-group-item-action" href="{% url 'accounts:settings' %}">Change password</a>
-          </div>
-        </div>
-        <div class="col-md-9">
-          <div class="tab-content">
-			<form id="user_form" method="post" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
-        {% csrf_token %}
-            <div class="tab-pane fade active show" id="account-general">
+        <div class="card overflow-hidden">
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action active" href="{% url 'accounts:profile' %}">General</a>
+                        <a class="list-group-item list-group-item-action" href="{% url 'accounts:settings' %}">Change password</a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <form id="user_form" method="post" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="tab-pane fade active show" id="account-general">
 
-              <div class="card-body media align-items-center">
-                <img src="{{ user.userprofile.profilePicture.url }}" alt="" class="d-block ui-w-80">
-				<div class="media-body ml-4">
-					<label class="btn btn-outline-primary">
+                                <div class="card-body media align-items-center">
+                                    <img src="{{ user.userprofile.profilePicture.url }}" alt="" class="d-block ui-w-80">
+                                    <div class="media-body ml-4">
+                                        <label class="btn btn-outline-primary">
 					  Upload new photo
 					  {{ picture_form.profilePicture }}
 					</label> &nbsp;
-				  </div>
-              </div>
-              <hr class="border-dark m-0">
+                                    </div>
+                                </div>
+                                <hr class="border-dark m-0">
 
-              <div class="card-body">
-			  <div class="white-text">
-          {{  user_form|crispy }}
-          {{  profile_form|crispy }}
-          
-				  <div class="text-right mt-3">
-					<input type="submit" name="submit" value="submit" class="button-59"  />
-				  </div>
-				</div>
-				</div>
-              </div>
-			</form>
-              </div>
+                                <div class="card-body">
+                                    <div class="white-text">
+                                        {% bootstrap_form user_form %} {% bootstrap_form profile_form %}
+
+
+                                        <div class="text-right mt-3">
+                                            <input type="submit" name="submit" value="submit" class="button-59" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>	
-	  </div>
+        </div>
     </div>
 </div>
 </div>
+</div>
 <div class="black">
-<br>
-<br>
+    <br>
+    <br>
 </div>
 {% endblock %}
