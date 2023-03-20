@@ -14,7 +14,7 @@ urlpatterns = [
     # path('saved/', views.saved, name='saved'),
 
     # all of these go call views.browse through wrapper functions:
-    path('browse/', views.test_browse, name='cars_root'),
+    path('', views.browse_all, name='cars_root'),
     path('used/', views.browse_used, name='cars_used'),
     path('new/', views.browse_new, name='cars_new'),
 ]
