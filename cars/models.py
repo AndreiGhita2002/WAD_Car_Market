@@ -1,8 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from cars import validators
-
 
 def get_model_choices(car_models):
     out = []
@@ -120,6 +118,20 @@ class Car(models.Model):
         ('convertible', 'Convertible'),
     )
 
+    YEARS = (
+        ('2023', '2023'),
+        ('2022', '2022'),
+        ('2021', '2021'),
+        ('2020', '2020'),
+        ('2019', '2019'),
+        ('2018', '2018'),
+        ('2017', '2017'),
+        ('2016', '2016'),
+        ('2015', '2015'),
+        ('2014', '2014'),
+        ('2013', '2013'),
+    )
+
     NUM_OF_SEATS = (
         (2, '2'),
         (4, '4'),
@@ -176,26 +188,25 @@ class Car(models.Model):
     views = models.IntegerField(default=0)
 
     # trading values:
-    seller = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    title = models.CharField(max_length=40, verbose_name="Title")
-    image = models.ImageField(upload_to='car_images/', blank=True, null=True, verbose_name="Photo")
-    price = models.DecimalField(verbose_name="Price", validators=[validators.is_positive],
-                                decimal_places=2, max_digits=10, blank=True, null=True)
-    description = models.TextField(verbose_name="Description", blank=True, null=True)
-    date_posted = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    location = models.CharField(max_length=10, choices=LOCATIONS, verbose_name="Location", blank=True, null=True)
+    seller = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=40, verbose_name="Title", default="Unnamed Car", null=True)
+    image = models.ImageField(upload_to='car_images/', verbose_name="Photo", null=True)
+    price = models.PositiveIntegerField(verbose_name="Price", null=True)
+    description = models.TextField(verbose_name="Description", null=True)
+    date_posted = models.DateTimeField(auto_now_add=True)
+    location = models.CharField(max_length=10, choices=LOCATIONS, verbose_name="Location", null=True)
 
     # physical car values:
-    brand = models.CharField(max_length=14, choices=CAR_BRANDS, verbose_name="Brand", blank=True, null=True)
-    model = models.CharField(max_length=18, choices=MODEL_CHOICES, verbose_name="Model", blank=True, null=True)
-    condition = models.CharField(max_length=4, choices=CONDITION, verbose_name="Condition", blank=True, null=True)
-    num_of_seats = models.PositiveIntegerField(choices=NUM_OF_SEATS, verbose_name="Number of seats", blank=True, null=True)
-    body_type = models.CharField(max_length=11, choices=BODY_TYPES, verbose_name="Body type", blank=True, null=True)
-    mileage = models.PositiveIntegerField(verbose_name="Mileage", blank=True, null=True)
-    transmission = models.CharField(max_length=9, choices=GEARBOX, verbose_name="Transmission", blank=True, null=True)
-    fuel_type = models.CharField(max_length=8, choices=FUEL, verbose_name="Fuel type", blank=True, null=True)
-    year = models.CharField(max_length=4, validators=[validators.is_valid_year], verbose_name="Year", blank=True, null=True)
-    colour = models.CharField(max_length=6, choices=COLOURS, verbose_name="Colour", blank=True, null=True)
+    brand = models.CharField(max_length=14, choices=CAR_BRANDS, verbose_name="Brand", null=True)
+    model = models.CharField(max_length=18, choices=MODEL_CHOICES, verbose_name="Model", null=True)
+    condition = models.CharField(max_length=4, choices=CONDITION, verbose_name="Condition", null=True)
+    num_of_seats = models.PositiveIntegerField(choices=NUM_OF_SEATS, verbose_name="Number of seats", null=True)
+    body_type = models.CharField(max_length=11, choices=BODY_TYPES, verbose_name="Body type", null=True)
+    mileage = models.PositiveIntegerField(verbose_name="Mileage", null=True)
+    transmission = models.CharField(max_length=9, choices=GEARBOX, verbose_name="Transmission", null=True)
+    fuel_type = models.CharField(max_length=8, choices=FUEL, verbose_name="Fuel type", null=True)
+    year = models.CharField(max_length=4, choices=YEARS, verbose_name="Year", null=True)
+    colour = models.CharField(max_length=6, choices=COLOURS, verbose_name="Colour", null=True)
 
     def __str__(self):
         return "Car:{" + self.title + "," + self.unique_car_id.__str__() + "}"
