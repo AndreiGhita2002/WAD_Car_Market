@@ -41,6 +41,9 @@ def browse(request, args=""):
     sorted_cars = filtered_cars.order_by('-views')[start:end]  # default sort by views
     context_dir['carlist'] = sorted_cars
 
+    if context_dir.get('page', -1) == -1:
+        context_dir['page'] = 0
+
     return render(request, 'browse.html', context=context_dir)
 
 
@@ -75,7 +78,7 @@ def car_details(request, car_id):
 # helper functions for browse():
 def get_filter_dict(filters):
     if filters == "":
-        return {}
+        return {'page': 0}
     filter_dict, key, val, is_key = {}, "", "", True
     for c in filters:
         if c == ':':
@@ -102,6 +105,8 @@ def filter_cars(car_objects, filter_dict):
     if filter_dict.get('condition', -1) != -1:
         context_dir['car_condition'] = filter_dict['condition']
         filtered_cars = filtered_cars.filter(condition__exact=filter_dict['condition'])
+    if filter_dict.get('page', -1) != -1:
+        context_dir['page'] = filter_dict['page']
     return filtered_cars, context_dir
 
 
@@ -114,7 +119,5 @@ def browse_new(request):
     return browse(request, args='condition:new')
 
 
-def test_browse(request):
-    cars = Car.objects.all()
-    context_dict = {'cars': cars}
-    return render(request, 'browse.html', context=context_dict)
+def browse_all(request):
+    return browse(request)

@@ -11,6 +11,9 @@
 {% block body_block %}
     <h1> BROWSE </h1>
     <br>
+    {% if car_condition %}
+        <p>You are browsing {{ car_condition }} cars.</p>
+    {% endif %}
     <p>most viewed/popular cars should be shown:</p>
     <br>
     {% if cars %}
