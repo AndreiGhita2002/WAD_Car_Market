@@ -5,6 +5,18 @@ from cars.models import Car
 
 # constant for how many car listings to show per page (maximum)
 CARS_PER_PAGE = 10
+# constant dict which tells filter_cars() how to search filter the car set
+# depending on what the user searched for
+SEARCH_TERMS = {
+    'title': 'search',
+    'condition': 'exact',
+    'brand': 'exact',
+    'model': 'search',
+    'num_of_seats': 'exact',
+    'fuel_type': 'exact',
+    'year': 'exact',
+    'colour': 'exact'
+}  # todo: add price and other stuff
 
 
 def add_car(request):
@@ -30,16 +42,19 @@ def browse(request, args=""):
     for example:
         - /cars/browse/used/ calls with args="condition:used"
         - if you are looking for new audi cars you call with args="condition:new,car_brand:audi"
-        - if you are looking for the 3rd page of searches do args="page:2" (counting starts at 0)
+        - if you are looking for the 3rd page of searches, do: args="page:2" (counting starts at 0)
         - all of these requirements can be combined with ','
     """
     filter_dict = get_filter_dict(args)
     filtered_cars, context_dir = filter_cars(Car.objects, filter_dict)
 
-    start = CARS_PER_PAGE * int(filter_dict['page'])
-    end = start + CARS_PER_PAGE
-    sorted_cars = filtered_cars.order_by('-views')[start:end]  # default sort by views
-    context_dir['carlist'] = sorted_cars
+    sorted_cars = filtered_cars.order_by('-views')  # default sort by views
+
+    if sorted_cars is not None:
+        start = CARS_PER_PAGE * int(filter_dict['page'])
+        end = min(start + CARS_PER_PAGE, sorted_cars.count())
+        sorted_cars = sorted_cars[start:end]  # selecting a CARS_PER_PAGE number of cars
+        context_dir['carlist'] = sorted_cars
 
     if context_dir.get('page', -1) == -1:
         context_dir['page'] = 0
@@ -100,11 +115,16 @@ def get_filter_dict(filters):
 def filter_cars(car_objects, filter_dict):
     context_dir = {}
     filtered_cars = Car.objects
-    # basic condition check; this will be expanded
-    # todo: expand this
-    if filter_dict.get('condition', -1) != -1:
-        context_dir['car_condition'] = filter_dict['condition']
-        filtered_cars = filtered_cars.filter(condition__exact=filter_dict['condition'])
+
+    for category in SEARCH_TERMS.keys():
+        if filter_dict.get(category, -1) != -1:
+            context_dir['car_' + category] = filter_dict[category]
+            instruction = SEARCH_TERMS.get(category, -1)
+            if instruction != -1:
+                lookup = "__".join([category, instruction])
+                filtered_cars = filtered_cars.filter(**{lookup: filter_dict[category]})
+            else:
+                print('[Error] search failed!! check cars/views.filter_cars')
     if filter_dict.get('page', -1) != -1:
         context_dir['page'] = filter_dict['page']
     return filtered_cars, context_dir
