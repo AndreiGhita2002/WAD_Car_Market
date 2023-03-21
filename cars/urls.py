@@ -13,5 +13,5 @@ urlpatterns = [
     path('', views.browse_all, name='cars_root'),
     path('<str:args>', views.browse, name='cars_search'),
     path('used/', views.browse_used, name='cars_used'),
-    path('new/', views.browse_new, name='cars_new'),
+    path('new/', views.browse_new, name='cars_new'),    
 ]

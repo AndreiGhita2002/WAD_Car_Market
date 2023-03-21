@@ -36,6 +36,8 @@ form {
     box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
     padding: 50px 35px;
     text-align: center;
+    opacity: 0;
+    animation: appear 1s forwards;
 }
 
 label {
@@ -144,4 +146,15 @@ input[type="submit"] {
 .account-switch a {
     margin-left: 5px;
     text-decoration: underline;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
