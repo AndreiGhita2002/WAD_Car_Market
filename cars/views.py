@@ -4,7 +4,7 @@ from cars.forms import CarListingForm
 from cars.models import Car
 
 # constant for how many car listings to show per page (maximum)
-CARS_PER_PAGE = 10
+CARS_PER_PAGE = 20
 # constant dict which tells filter_cars() how to search filter the car set
 # depending on what the user searched for
 SEARCH_TERMS = {
@@ -41,9 +41,9 @@ def browse(request, args=""):
 
     for example:
         - /cars/browse/used/ calls with args="condition:used"
-        - if you are looking for new audi cars you call with args="condition:new,car_brand:audi"
+        - if you are looking for new audi cars you call with args="condition:new-brand:audi"
         - if you are looking for the 3rd page of searches, do: args="page:2" (counting starts at 0)
-        - all of these requirements can be combined with ','
+        - all of these requirements can be combined with ',' or with '-'
     """
     filter_dict = get_filter_dict(args)
     filtered_cars, context_dir = filter_cars(Car.objects, filter_dict)
@@ -51,9 +51,9 @@ def browse(request, args=""):
     sorted_cars = filtered_cars.order_by('-views')  # default sort by views
 
     if sorted_cars is not None:
-        # start = CARS_PER_PAGE * int(filter_dict['page'])
-        # end = min(start + CARS_PER_PAGE, sorted_cars.count())
-        # sorted_cars = sorted_cars[start:end]  # selecting a CARS_PER_PAGE number of cars
+        start = CARS_PER_PAGE * int(filter_dict['page'])
+        end = min(start + CARS_PER_PAGE, sorted_cars.count())
+        sorted_cars = sorted_cars[start:end]  # selecting a CARS_PER_PAGE number of cars
         context_dir['carlist'] = sorted_cars
 
     if context_dir.get('page', -1) == -1:
@@ -99,7 +99,7 @@ def get_filter_dict(filters):
     for c in filters:
         if c == ':':
             is_key = False
-        elif c == ',':
+        elif c == ',' or c == '-':
             filter_dict[key] = val
             key, val = "", ""
             is_key = True

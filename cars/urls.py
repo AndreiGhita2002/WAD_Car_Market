@@ -1,4 +1,5 @@
 from django.urls import path
+
 from cars import views
 
 app_name = 'cars'
@@ -15,6 +16,7 @@ urlpatterns = [
 
     # all of these go call views.browse through wrapper functions:
     path('', views.browse_all, name='cars_root'),
+    path('<str:args>', views.browse, name='cars_search'),
     path('used/', views.browse_used, name='cars_used'),
     path('new/', views.browse_new, name='cars_new'),
 ]
