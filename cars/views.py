@@ -51,14 +51,15 @@ def browse(request, args=""):
     sorted_cars = filtered_cars.order_by('-views')  # default sort by views
 
     if sorted_cars is not None:
-        start = CARS_PER_PAGE * int(filter_dict['page'])
-        end = min(start + CARS_PER_PAGE, sorted_cars.count())
-        sorted_cars = sorted_cars[start:end]  # selecting a CARS_PER_PAGE number of cars
+        # start = CARS_PER_PAGE * int(filter_dict['page'])
+        # end = min(start + CARS_PER_PAGE, sorted_cars.count())
+        # sorted_cars = sorted_cars[start:end]  # selecting a CARS_PER_PAGE number of cars
         context_dir['carlist'] = sorted_cars
 
     if context_dir.get('page', -1) == -1:
         context_dir['page'] = 0
 
+    print(context_dir)
     return render(request, 'browse.html', context=context_dir)
 
 

@@ -176,26 +176,26 @@ class Car(models.Model):
     views = models.IntegerField(default=0)
 
     # trading values:
-    seller = models.ForeignKey(User, on_delete=models.CASCADE)
+    seller = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     title = models.CharField(max_length=40, verbose_name="Title")
-    image = models.ImageField(upload_to='car_images/', blank=True, verbose_name="Photo")
+    image = models.ImageField(upload_to='car_images/', blank=True, null=True, verbose_name="Photo")
     price = models.DecimalField(verbose_name="Price", validators=[validators.is_positive],
-                                decimal_places=2, max_digits=10)
-    description = models.TextField(verbose_name="Description")
-    date_posted = models.DateTimeField(auto_now_add=True)
-    location = models.CharField(max_length=10, choices=LOCATIONS, verbose_name="Location")
+                                decimal_places=2, max_digits=10, blank=True, null=True)
+    description = models.TextField(verbose_name="Description", blank=True, null=True)
+    date_posted = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    location = models.CharField(max_length=10, choices=LOCATIONS, verbose_name="Location", blank=True, null=True)
 
     # physical car values:
-    brand = models.CharField(max_length=14, choices=CAR_BRANDS, verbose_name="Brand")
-    model = models.CharField(max_length=18, choices=MODEL_CHOICES, verbose_name="Model")
-    condition = models.CharField(max_length=4, choices=CONDITION, verbose_name="Condition")
-    num_of_seats = models.PositiveIntegerField(choices=NUM_OF_SEATS, verbose_name="Number of seats")
-    body_type = models.CharField(max_length=11, choices=BODY_TYPES, verbose_name="Body type")
-    mileage = models.PositiveIntegerField(verbose_name="Mileage")
-    transmission = models.CharField(max_length=9, choices=GEARBOX, verbose_name="Transmission")
-    fuel_type = models.CharField(max_length=8, choices=FUEL, verbose_name="Fuel type")
-    year = models.CharField(max_length=4, validators=[validators.is_valid_year], verbose_name="Year")
-    colour = models.CharField(max_length=6, choices=COLOURS, verbose_name="Colour")
+    brand = models.CharField(max_length=14, choices=CAR_BRANDS, verbose_name="Brand", blank=True, null=True)
+    model = models.CharField(max_length=18, choices=MODEL_CHOICES, verbose_name="Model", blank=True, null=True)
+    condition = models.CharField(max_length=4, choices=CONDITION, verbose_name="Condition", blank=True, null=True)
+    num_of_seats = models.PositiveIntegerField(choices=NUM_OF_SEATS, verbose_name="Number of seats", blank=True, null=True)
+    body_type = models.CharField(max_length=11, choices=BODY_TYPES, verbose_name="Body type", blank=True, null=True)
+    mileage = models.PositiveIntegerField(verbose_name="Mileage", blank=True, null=True)
+    transmission = models.CharField(max_length=9, choices=GEARBOX, verbose_name="Transmission", blank=True, null=True)
+    fuel_type = models.CharField(max_length=8, choices=FUEL, verbose_name="Fuel type", blank=True, null=True)
+    year = models.CharField(max_length=4, validators=[validators.is_valid_year], verbose_name="Year", blank=True, null=True)
+    colour = models.CharField(max_length=6, choices=COLOURS, verbose_name="Colour", blank=True, null=True)
 
     def __str__(self):
         return "Car:{" + self.title + "," + self.unique_car_id.__str__() + "}"

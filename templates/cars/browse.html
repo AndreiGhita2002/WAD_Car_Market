@@ -16,12 +16,14 @@
     {% endif %}
     <p>most viewed/popular cars should be shown:</p>
     <br>
-    {% if cars %}
+    {% if carlist %}
         <ul>
-            {% for car in cars %}
+            {% for car in carlist %}
                 <a href="{% url 'cars:car_details' car_id=car.unique_car_id %}">
                 <li>{{ car.brand }} {{ car.model }} </li>
-                <img src="{{ car.image.url }}">
+                    {% if car.image %}
+                    <img src="{{ car.image.url }}">
+                    {% endif %}
                 </a>
             {% endfor %}
        </ul>
