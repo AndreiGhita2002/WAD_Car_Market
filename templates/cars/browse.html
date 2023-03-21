@@ -1,12 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 
-<!-- {% block title_block %}
-
-     name the title of this page based on whatever the user is browsing
-     for example:
-        if user is browsing used cars then the title should be used
-        if they are browsing new audi cars then title should be brand new audi cars {% endblock %} -->
+{% block title_block %}
+    {{ page_title }}
+{% endblock %}
 
 {% block body_block %}
     <h1> BROWSE </h1>

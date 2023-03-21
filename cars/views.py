@@ -59,7 +59,7 @@ def browse(request, args=""):
     if context_dir.get('page', -1) == -1:
         context_dir['page'] = 0
 
-    print(context_dir)
+    context_dir['page_title'] = create_title(filter_dict)
     return render(request, 'browse.html', context=context_dir)
 
 
@@ -129,6 +129,16 @@ def filter_cars(car_objects, filter_dict):
     if filter_dict.get('page', -1) != -1:
         context_dir['page'] = filter_dict['page']
     return filtered_cars, context_dir
+
+
+def create_title(filter_dict):
+    title = 'Browsing '
+    for key in filter_dict.keys():
+        if key != 'page':
+            title += filter_dict[key]
+            title += ' '
+    title += 'Cars'
+    return title
 
 
 # wrapper functions for browse():
