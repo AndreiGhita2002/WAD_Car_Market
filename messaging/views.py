@@ -2,9 +2,11 @@ from django.shortcuts import render
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from .forms import MessageForm
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def message_seller(request):
+    user_exist = False
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
@@ -18,18 +20,22 @@ def message_seller(request):
             try:
                 recipient_user = User.objects.get(username=recipient_username)
                 recipient_email = recipient_user.email
+                user_exist = True
             except User.DoesNotExist:
                 recipient_email = None
 
             # Send the email
             if recipient_email:
                 subject = f'{name} is interested in your car'
-                message = f'{message}'
+                message = f'{message} ; Please contact 'f'{email}'
                 sender_email = email
                 send_mail(subject, message, sender_email, [recipient_email], fail_silently=False,
-                          reply_to=[sender_email])
+                          )
 
-            return render(request, 'success.html')
+            if user_exist:
+                return render(request, 'success.html')
+            else:
+                return render(request, 'index.html')
     else:
         form = MessageForm()
 

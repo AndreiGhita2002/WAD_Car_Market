@@ -147,3 +147,20 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'djangoproject185@gmail.com'
 EMAIL_HOST_PASSWORD = 'tbwzinqjtrziqvyc'
+
+
+#<!DOCTYPE html>
+#<html lang="en">
+    #<head>
+        #<meta charset="UTF-8">
+        #<title>Message Seller</title>
+    #</head>
+    #<body>
+        #<h1>Contact Seller</h1>
+        #<form method="post">
+        #{% csrf_token %}
+        #{{ form.as_p }}
+        #<button type="submit">Send Message</button>
+        #</form>
+    #</body>
+#</html>
