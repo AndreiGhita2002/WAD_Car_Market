@@ -22,7 +22,7 @@
                 <a href="{% url 'cars:car_details' car_id=car.unique_car_id %}">
                 <li>{{ car.brand }} {{ car.model }} </li>
                     {% if car.image %}
-                    <img src="{{ car.image.url }}">
+                    <img src="{{ car.image.url }}" alt="picture of a car">
                     {% endif %}
                 </a>
             {% endfor %}
