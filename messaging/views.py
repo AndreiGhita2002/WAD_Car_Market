@@ -29,7 +29,7 @@ def message_seller(request):
                 send_mail(subject, message, sender_email, [recipient_email], fail_silently=False,
                           reply_to=[sender_email])
 
-            return render(request, 'success.html')
+            return render(request, 'messaging/success.html')
     else:
         form = MessageForm()
 

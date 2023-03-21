@@ -26,7 +26,7 @@ def add_car(request):
             car_listing = form.save(commit=False)
             car_listing.owner = request.user
             car_listing.save()
-            return redirect('')  # temporarily redirect user to home page, to be amended later on
+            return render(request, 'cars/success.html')
     else:
         form = CarListingForm()
         return render(request, 'add_car.html', {'form': form})
