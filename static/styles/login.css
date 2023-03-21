@@ -37,6 +37,7 @@ body {
     left: calc(50% - 280px);
     top: calc(50% + 170px);
     z-index: -1;
+    animation: move 2s ease-in-out alternate;
 }
 
 .shape:last-child {
@@ -44,6 +45,7 @@ body {
     right: calc(50% - 280px);
     bottom: calc(50% + 170px);
     z-index: -1;
+    animation: moveTwo 2s ease-in-out alternate;
 }
 
 .form-container {
@@ -141,5 +143,29 @@ input[type="submit"] {
     100% {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes move {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(-30px, -260px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes moveTwo {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(30px, 260px);
+    }
+    100% {
+        transform: translate(0, 0);
     }
 }
