@@ -24,7 +24,7 @@ def add_car(request):
         form = CarListingForm(request.POST, request.FILES)
         if form.is_valid():
             car_listing = form.save(commit=False)
-            car_listing.owner = request.user
+            car_listing.seller = request.user
             car_listing.save()
             return render(request, 'cars/success.html')
     else:
