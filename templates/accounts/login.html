@@ -37,6 +37,7 @@
             </div>
             {% endif %}
             <p> Register a new account? <a href="{% url 'accounts:register' %}"> sign up</a></p>
+            <p class="forgot"> Forgot password? <a href="{% url 'password_reset' %}"> forgot password</a></p>
             <input type="submit" name="submit" value="Login" />
         </form>
 
