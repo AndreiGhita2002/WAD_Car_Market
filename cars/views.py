@@ -26,7 +26,7 @@ def add_car(request):
             car_listing = form.save(commit=False)
             car_listing.owner = request.user
             car_listing.save()
-            return redirect('')  # temporarily redirect user to home page, to be amended later on
+            return render(request, 'cars/success.html')
     else:
         form = CarListingForm()
         return render(request, 'add_car.html', {'form': form})
@@ -68,6 +68,7 @@ def car_details(request, car_id):
     car = get_object_or_404(Car, pk=car_id)
 
     context_dict = {
+        'car' : car,
         'page_title': f'{car.year} {car.colour} {car.brand} {car.model}',
         'seller': car.seller,
         'car_title': car.title,
@@ -86,8 +87,11 @@ def car_details(request, car_id):
         'fuel_type': car.fuel_type,
         'year': car.year,
         'colour': car.colour,
+        'related_cars': Car.objects.filter(brand=car.brand).exclude(pk=car.pk)[:4],
     }
-    # also todo: remember to increment view of the shown car (with cookies ideally)
+    
+    car.views += 1
+    car.save()
     return render(request, 'car_details.html', context=context_dict)
 
 

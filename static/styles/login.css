@@ -37,6 +37,7 @@ body {
     left: calc(50% - 280px);
     top: calc(50% + 170px);
     z-index: -1;
+    animation: move 2s ease-in-out alternate;
 }
 
 .shape:last-child {
@@ -44,6 +45,7 @@ body {
     right: calc(50% - 280px);
     bottom: calc(50% + 170px);
     z-index: -1;
+    animation: moveTwo 2s ease-in-out alternate;
 }
 
 .form-container {
@@ -63,6 +65,8 @@ body {
     letter-spacing: 0.5px;
     outline: none;
     border: none;
+    opacity: 0;
+    animation: appear 1s forwards;
 }
 
 h1 {
@@ -127,6 +131,41 @@ input[type="submit"] {
     padding: 1.5rem;
 }
 
-.forgot{
+.forgot {
     margin-top: 40px;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes move {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(-30px, -260px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes moveTwo {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(30px, 260px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
 }
