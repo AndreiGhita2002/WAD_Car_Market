@@ -25,6 +25,8 @@ urlpatterns = [
                   path('message_seller/', include('messaging.urls')),
                   path('accounts/', include('accounts.urls')),
                   path('cars/', include('cars.urls')),
+                  path('about-us/', views.about_us, name='about_us'),
+                  path('contact-us/', views.contact_us, name='contact_us'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)
