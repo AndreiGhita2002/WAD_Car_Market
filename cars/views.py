@@ -63,6 +63,7 @@ def browse(request, args=""):
         context_dir['page'] = 0
 
     context_dir['page_title'] = create_title(filter_dict)
+    print(context_dir['carlist'])
     return render(request, 'browse.html', context=context_dir)
 
 

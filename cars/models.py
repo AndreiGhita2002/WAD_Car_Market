@@ -189,7 +189,7 @@ class Car(models.Model):
     views = models.IntegerField(default=0)
 
     # trading values:
-    seller = models.ForeignKey(User, on_delete=models.CASCADE)
+    seller = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=50, verbose_name="Title", default="Unnamed Car", null=True)
     image = models.ImageField(upload_to='car_images/', verbose_name="Photo", null=True)
     price = models.PositiveIntegerField(verbose_name="Price", null=True, validators=[MaxValueValidator(100000000)])

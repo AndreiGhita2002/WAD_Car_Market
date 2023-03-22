@@ -1,5 +1,5 @@
-{% extends "base.html" %} {% load static %} {% block title_block %} Browse {% endblock %} {% block body_block %}
-<h1>BROWSE</h1>
+{% extends "base.html" %} {% load static %} {% block title_block %} {{ page_title }} {% endblock %} {% block body_block %}
+<h1>{{ page_title }}</h1>
 <div class="row">
     {% for car in carlist %}
     <div class="col">
@@ -11,7 +11,8 @@
                 <h6 class="card-text">{{ car.price }} </h6>
                 <h6 class="card-text">{{ car.mileage }}</h6>
                 <h6 class="card-text">{{ car.location }}</h6>
-                <a href="browse/details/{{ car.unique_car_id }}" class="btn btn-primary">Details</a>
+                <a href="{% url 'cars:car_details' car.pk %}" class="btn btn-primary">Details</a>
+
             </div>
         </div>
     </div>
