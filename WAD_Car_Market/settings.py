@@ -151,10 +151,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_USER', '')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD', '')
+EMAIL_HOST_USER = os.environ['EMAIL_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_PASSWORD']
 
-if EMAIL_HOST_USER == '':
-    print('[!!] Could not get EMAIL_USER from \'os.environ\'.')
-if EMAIL_HOST_PASSWORD == '':
-    print('[!!] Could not get EMAIL_PASSWORD from \'os.environ\'.')
+#You will need to create a .env file in WAD_CAR_MARKET folder, the EMAIL_PASSWORD variable and EMAIL_USER will be given to u. Set it in
+#the env.
