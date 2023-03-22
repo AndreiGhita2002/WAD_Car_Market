@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.core.validators import MaxValueValidator
 
 
 def get_model_choices(car_models):
@@ -189,11 +190,11 @@ class Car(models.Model):
 
     # trading values:
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=40, verbose_name="Title", default="Unnamed Car", null=True)
+    title = models.CharField(max_length=50, verbose_name="Title", default="Unnamed Car", null=True)
     image = models.ImageField(upload_to='car_images/', verbose_name="Photo", null=True)
-    price = models.PositiveIntegerField(verbose_name="Price", null=True)
+    price = models.PositiveIntegerField(verbose_name="Price", null=True, validators=[MaxValueValidator(100000000)])
     description = models.TextField(verbose_name="Description", null=True)
-    date_posted = models.DateTimeField(auto_now_add=True)
+    date_posted = models.DateTimeField(auto_now_add=True, )
     location = models.CharField(max_length=10, choices=LOCATIONS, verbose_name="Location", null=True)
 
     # physical car values:
@@ -202,8 +203,9 @@ class Car(models.Model):
     condition = models.CharField(max_length=4, choices=CONDITION, verbose_name="Condition", null=True)
     num_of_seats = models.PositiveIntegerField(choices=NUM_OF_SEATS, verbose_name="Number of seats", null=True)
     body_type = models.CharField(max_length=11, choices=BODY_TYPES, verbose_name="Body type", null=True)
-    mileage = models.PositiveIntegerField(verbose_name="Mileage", null=True)
+    mileage = models.PositiveIntegerField(verbose_name="Mileage", null=True, validators=[MaxValueValidator(500000)])
     transmission = models.CharField(max_length=9, choices=GEARBOX, verbose_name="Transmission", null=True)
+
     fuel_type = models.CharField(max_length=8, choices=FUEL, verbose_name="Fuel type", null=True)
     year = models.CharField(max_length=4, choices=YEARS, verbose_name="Year", null=True)
     colour = models.CharField(max_length=6, choices=COLOURS, verbose_name="Colour", null=True)

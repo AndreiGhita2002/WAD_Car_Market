@@ -27,6 +27,8 @@ def add_car(request):
             car_listing.seller = request.user
             car_listing.save()
             return render(request, 'cars/success.html')
+        else:
+            return render(request, 'add_car.html', {'form': form})
     else:
         form = CarListingForm()
         return render(request, 'add_car.html', {'form': form})
@@ -64,11 +66,10 @@ def browse(request, args=""):
 
 
 def car_details(request, car_id):
-
     car = get_object_or_404(Car, pk=car_id)
 
     context_dict = {
-        'car' : car,
+        'car': car,
         'page_title': f'{car.year} {car.colour} {car.brand} {car.model}',
         'seller': car.seller,
         'car_title': car.title,
@@ -89,7 +90,7 @@ def car_details(request, car_id):
         'colour': car.colour,
         'related_cars': Car.objects.filter(brand=car.brand).exclude(pk=car.pk)[:4],
     }
-    
+
     car.views += 1
     car.save()
     return render(request, 'car_details.html', context=context_dict)
