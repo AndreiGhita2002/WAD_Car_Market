@@ -15,11 +15,12 @@ class CarListingForm(forms.ModelForm):
 
 
 class CarSearchForm(forms.Form):
+    CONDITIONS = tuple([('', 'Conditions:')] + list(Car.CONDITION))
     PRICES = (0, 1000, 2000, 3000, 4000, 5000, 10_000, 20_000)
 
     title = forms.CharField(max_length=50, help_text='Posting Title', required=False)
+    condition = forms.ChoiceField(choices=CONDITIONS, required=False, initial='')
     # todo: implement and test these:
-    # condition = forms.ChoiceField(choices=Car.CONDITION, required=False)
     # brand = forms.ChoiceField(choices=Car.CAR_BRANDS, required=False)
     # # todo: add model choices instead of a string field
     # model = forms.CharField(max_length=18, help_text='Model', required=False)
@@ -32,5 +33,14 @@ class CarSearchForm(forms.Form):
     # location = forms.ChoiceField(choices=Car.LOCATIONS, required=False)
 
     def get_search_url(self):
-        return 'title:' + self.cleaned_data['title']
+        print('Forms:')
+        filters = []
+        for field in self.fields:
+            print(f' field:{field}')
+            data = self.cleaned_data.get(field)
+            print(f' -data:{data}')
+            if data is not None and data != '':
+                filters.append(str(field) + ':' + self.cleaned_data[str(field)])
+                print(' -returned')
+        return '-'.join(filters)
 
