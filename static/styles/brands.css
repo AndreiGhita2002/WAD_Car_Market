@@ -1,0 +1,56 @@
+.brand-container {
+  background-color: white;
+  padding: 20px;
+  margin-top: 24%;
+  margin-left: 5%;
+  display: inline-block;
+  max-width: 100%;
+  text-align: center;
+}
+
+.brand-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.brand-item {
+  display: inline-block;
+  border: 1px solid #808080;
+  text-align: center;
+  margin-right: 20px;
+  padding: 20px;
+}
+
+.brand-item:hover {
+  border: 1px solid #0066b3;
+}
+
+.brand-item img {
+  width: 100px;
+  height: 100px;
+}
+
+.brand-item p {
+  margin: 15px 0;
+}
+
+.show-all-brands-btn {
+  display: block;
+  margin-top: 20px;
+  margin-left: 244px;
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.show-all-brands-btn:hover {
+  background-color: black;
+  color: white;
+}
+
+
