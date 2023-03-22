@@ -6,7 +6,6 @@
 {% endblock %}
 
 {% block style_block %}
-    <link rel="stylesheet" type="text/css" href="/static/styles/car-details.css">
     <link rel="stylesheet" type="text/css" href="/static/styles/base.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -16,63 +15,9 @@
 {% endblock %}
 
 {% block body_block %}
-    <h2>{{ page_title }}</h2>
-    <div class="car-details">
-        <div class="car-image">
-            {% if image_url %}
-                <img src="{{ image_url }}" alt="image of the car">
-            {% endif %}
-        </div>
-        <div class="specifications-container">
-            <strong><h3>Specifications</h3></strong>
-             <ul class="specifications">
-                 <li><strong>Manufacturing Year:</strong> {{ year }}</li>
-                 <li><strong>Mileage:</strong> {{ mileage }}</li>
-                 <li><strong>Body Type:</strong> {{ body_type }}</li>
-                 <li><strong>Transmission:</strong> {{ transmission }}</li>
-                 <li><strong>Fuel Type:</strong> {{ fuel_type }}</li>
-                 <li><strong>Exterior Color:</strong> {{ colour }}</li>
-                 <li><strong>Seats:</strong> {{ num_of_seats }}</li>
-             </ul>
-        </div>
-        <div class="description-container">
-            <strong><h3>Seller's Description</h3></strong>
-            {{ description }}
-        </div>
-    </div>
-    <div class="trader">
-        <p class="used-sticker">Used</p>
-        <h3> {{ price }}</h3>
-        <p> {{ mileage }}</p> <!-- add speedometer logo here-->
-        <p> {{ location }}</p> <!-- add location logo here-->
-        <div class="seller">
-            <!-- profile pic of the seller goes here-->
-            <!-- name of the seller goes here-->
-        </div>
-    </div>
-    {% if related_cars %}
-    <div class="related-cars">
-        <h2>You may be interested in</h2>
-        <div class="carousel">
-            <div class="carousel-container">
-                {% for car in related_cars %}
-                 <div class="carousel-item">
-                     <img src="{{ car.image.url }}" alt="car image">
-                     <h4> {{ year }} </h4>
-                     <h3> {{ brand }} {{ car.model }} </h3>
-                     <h4> {{ price }} </h4>
-                     <h4> {{ location }}</h4>
-                 </div>
-                {% endfor %}
-            </div>
-            <button class="carousel-button prev"> &#10094; </button>
-            <button class="carousel-button next"> &#10095; </button>
-        </div>
-    </div>
-    {% else %}
-        <strong>No related cars</strong>
-    {% endif %}
-
-    </div>
 
 {% endblock %}
+
+
+
+
