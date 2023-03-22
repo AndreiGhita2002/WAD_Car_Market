@@ -18,7 +18,8 @@ SEARCH_TERMS = {
     'colour': 'exact'
 }  # todo: add price and other stuff
 
-@login_required 
+
+@login_required
 def add_car(request):
     if request.method == 'POST':
         form = CarListingForm(request.POST, request.FILES)
