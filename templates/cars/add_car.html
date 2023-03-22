@@ -18,7 +18,7 @@
 
 {% block body_block %}
   <h1>Add Car</h1>
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form form %}
     <button type="submit">Submit</button>
