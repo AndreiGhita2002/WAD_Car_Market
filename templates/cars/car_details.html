@@ -1,9 +1,45 @@
-{% extends "base.html" %} {% load static %} {% block title_block %}{{ page_title }}{% endblock %} {% block body_block %}
-<h1>{{ page_title }}</h1>
-{% if image_url %}
-<img src="{{ image_url }}" alt="picture of a car" class="bd-placeholder-img card-img-top" height="200"> {% endif %}
-<p>Price: {{ price }}</p>
-<p>Mileage: {{ mileage }}</p>
-<p>Location: {{ location }}</p>
-<!-- Add more fields as needed -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block title_block %}
+  {{ year }} {{ colour }} {{ car_title }}
 {% endblock %}
+
+{% block body_block %}
+    <h1 style="margin-top:40px; margin-left: 320px;">{{ car_title }}</h1>
+    {% if image_url %}
+      <img src="{{ image_url }}" alt="picture of a car" style="width: 800px; margin-bottom: 40px; margin-left: 40px; margin-right: 840px; margin-top: 20px;">
+    {% endif %}
+      <div style="position: absolute; top: 196px; right: 780px;">
+        <h3> Condition: {{ condition }} </h3>
+        <h3> Price: £{{ price }} </h3>
+        <h3> Mileage: {{ mileage }} </h3>
+        <h3> Location: {{ location }} </h3>
+      </div>
+
+        <!--   <div> -->
+        <!--      <h2>Seller Profile</h2>-->
+        <!--      <p>Name: {{ seller_name }}</p>-->
+        <!--      <p>Email: {{ seller_email }}</p>-->
+        <!--      <p>Phone: {{ seller_phone }}</p>-->
+        <!-- </div>  -->
+
+       <div style="margin-left: 40px">
+            <h2>Car Specs</h2>
+                <ul>
+                    <li>Make: {{ brand }}</li>
+                    <li>Model: {{ model }}</li>
+                    <li>Manufacturing Year: {{ year }}</li>
+                    <li>Body Type: {{ body_type }}</li>
+                    <li>Transmission: {{ transmission }}</li>
+                    <li>Fuel Type: {{ fuel_type }}</li>
+                    <li>Exterior Color: {{ colour }}</li>
+                </ul>
+       </div>
+
+      <div style="margin-left: 40px">
+          <h2>Description</h2>
+          <p style="margin-right: 1060px">{{ description }}</p>
+      </div>
+{% endblock %}
+
