@@ -1,3 +1,5 @@
+import sys
+
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -136,25 +138,36 @@ def get_filter_dict(filters):
 def filter_cars(car_objects, filter_dict):
     context_dir = {}
     filtered_cars = Car.objects
-
+    min_price = None
+    max_price = None
     for category in SEARCH_TERMS.keys():
         if filter_dict.get(category, -1) != -1:
-            context_dir['car_' + category] = filter_dict[category]
-            instruction = SEARCH_TERMS.get(category, -1)
-            if instruction != -1:
-                lookup = "__".join([category, instruction])
-                filtered_cars = filtered_cars.filter(**{lookup: filter_dict[category]})
+            if category == 'min_price':
+                min_price = filter_dict.get('min_price')
+            elif category == 'max_price':
+                min_price = filter_dict.get('max_price')
             else:
-                print('[Error] search failed!! check cars/views.filter_cars')
+                context_dir['car_' + category] = filter_dict[category]
+                instruction = SEARCH_TERMS.get(category, -1)
+                if instruction != -1:
+                    lookup = "__".join([category, instruction])
+                    filtered_cars = filtered_cars.filter(**{lookup: filter_dict[category]})
+                else:
+                    print('[Error] search failed!! check cars/views.filter_cars')
     if filter_dict.get('page', -1) != -1:
         context_dir['page'] = filter_dict['page']
+    # todo: get min and max price filtering working
+    if min_price is not None and type(min_price) == int:
+        filtered_cars = filtered_cars.filter(price__gte=min_price)
+    if max_price is not None and type(max_price) == int:
+        filtered_cars = filtered_cars.filter(price__lte=max_price)
     return filtered_cars, context_dir
 
 
 def create_title(filter_dict):
     title = 'Browsing '
     for key in filter_dict.keys():
-        if key != 'page':
+        if key != 'page' and key != 'min_price' and key != 'max_price':
             title += filter_dict[key]
             title += ' '
     title += 'Cars'
