@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
+from django.contrib.auth.decorators import login_required
 from cars.forms import CarListingForm
 from cars.models import Car
 
@@ -18,7 +18,7 @@ SEARCH_TERMS = {
     'colour': 'exact'
 }  # todo: add price and other stuff
 
-
+@login_required 
 def add_car(request):
     if request.method == 'POST':
         form = CarListingForm(request.POST, request.FILES)
