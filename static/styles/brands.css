@@ -25,6 +25,7 @@
 
 .brand-item:hover {
   border: 1px solid #0066b3;
+  cursor: pointer;
 }
 
 .brand-item img {
