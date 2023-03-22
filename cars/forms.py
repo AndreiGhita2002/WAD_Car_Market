@@ -16,20 +16,32 @@ class CarListingForm(forms.ModelForm):
 
 class CarSearchForm(forms.Form):
     CONDITIONS = tuple([('', 'Conditions:')] + list(Car.CONDITION))
-    PRICES = (0, 1000, 2000, 3000, 4000, 5000, 10_000, 20_000)
+    BRANDS = tuple([('', 'Brands:')] + list(Car.CAR_BRANDS))
+    MODELS = tuple([('', 'Models:')] + list(Car.MODEL_CHOICES))
+    SEATS = tuple([('', 'Number of Seats:')] + list(Car.NUM_OF_SEATS))
+    FUEL = tuple([('', 'Fuel Type:')] + list(Car.FUEL))
+    YEARS = tuple([('', 'Year:')] + list(Car.YEARS))
+    COLOURS = tuple([('', 'Colours:')] + list(Car.COLOURS))
+    PRICES = [(1000, '1000'), (2000, '2000'), (3000, '3000'), (4000, '4000'), (5000, '5000'),
+              (10000, '10000'), (20000, '200000')]
+    MIN_PRICES = tuple([(0, 'Minimum Price:')] + PRICES)
+    MAX_PRICES = tuple([(0, 'Maximum Price:')] + PRICES)
 
     title = forms.CharField(max_length=50, help_text='Posting Title', required=False)
     condition = forms.ChoiceField(choices=CONDITIONS, required=False, initial='')
-    # todo: implement and test these:
-    # brand = forms.ChoiceField(choices=Car.CAR_BRANDS, required=False)
-    # # todo: add model choices instead of a string field
+    # todo: make these linked somehow:
+    #  models should be linked with the brand choice
+    brand = forms.ChoiceField(choices=BRANDS, required=False, initial='')
+    model = forms.ChoiceField(choices=MODELS, required=False, initial='')
     # model = forms.CharField(max_length=18, help_text='Model', required=False)
-    # num_of_seats = forms.ChoiceField(choices=Car.NUM_OF_SEATS, required=False)
-    # fuel_type = forms.ChoiceField(choices=Car.FUEL, required=False)
-    # year = forms.ChoiceField(choices=Car.YEARS, required=False)
-    # colour = forms.ChoiceField(choices=Car.COLOURS, required=False)
-    # min_price = forms.ChoiceField(choices=PRICES, required=False)
-    # max_price = forms.ChoiceField(choices=PRICES, required=False)
+
+    num_of_seats = forms.ChoiceField(choices=SEATS, required=False, initial='')
+    fuel_type = forms.ChoiceField(choices=FUEL, required=False, initial='')
+    year = forms.ChoiceField(choices=YEARS, required=False, initial='')
+    colour = forms.ChoiceField(choices=COLOURS, required=False, initial='')
+    min_price = forms.ChoiceField(choices=MIN_PRICES, required=False, initial=-1)
+    max_price = forms.ChoiceField(choices=MAX_PRICES, required=False, initial=-1)
+    # todo: implement this in a nice way
     # location = forms.ChoiceField(choices=Car.LOCATIONS, required=False)
 
     def get_search_url(self):
