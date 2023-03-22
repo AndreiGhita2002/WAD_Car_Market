@@ -1,0 +1,120 @@
+.black{
+    background-color: black;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .screen {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    width: 375px;
+    height: 667px;
+    border: 4px solid #7a7a7a;
+    border-radius: 32px;
+    background-color: #F5F5F5;
+    box-shadow: 2px 8px 32px rgba(0,0,0,0.50);
+  }
+  
+  .clouds{
+      position: relative;
+      bottom: -100px;
+      width: 243px;
+      height: 172px;
+      opacity: 0;
+      animation: clouds 1s .8s ease-in forwards;
+  }
+  
+  .plane {
+      position: relative;
+      width: 139px;
+      height: 139px;
+      opacity: 0;
+      animation: plane-start .8s .8s ease-out, plane-loop 1.6s 1.6s linear infinite;
+  
+  }
+  
+  .message {
+      margin-top: 80px;
+    font-family: Rubik, sans-serif;
+    font-size: 16px;
+    color: #292929;
+      letter-spacing: 1px;
+    animation: message .3s 1.6s ease-in-out backwards;
+  }
+  
+  
+  @keyframes plane-start{ 
+      0% { transform: translate(-80px, 130px) ; }
+      50% { opacity:1 }
+      100% { transform: translate(0px, 0); opacity:1  }
+  }
+  
+  @keyframes plane-loop {
+      0% { transform: translate(0px, 0); opacity:1  }
+      50% { transform: translate(-20px, 30px); opacity:1  }
+      100% { transform: translate(0px, 0); opacity:1  }
+  }
+  
+   @keyframes clouds{
+     from { opacity: 0 }
+     to { opacity: 1 }
+  }
+  
+  @keyframes message{ 
+      from { opacity: 0 }
+      to { opacity: 1 }
+  }
+
+  button {
+    --c:  #229091; /* the color*/
+    
+    box-shadow: 0 0 0 .1em inset var(--c); 
+    --_g: linear-gradient(var(--c) 0 0) no-repeat;
+    background: 
+      var(--_g) calc(var(--_p,0%) - 100%) 0%,
+      var(--_g) calc(200% - var(--_p,0%)) 0%,
+      var(--_g) calc(var(--_p,0%) - 100%) 100%,
+      var(--_g) calc(200% - var(--_p,0%)) 100%;
+    background-size: 50.5% calc(var(--_p,0%)/2 + .5%);
+    outline-offset: .1em;
+    transition: background-size .4s, background-position 0s .4s;
+  }
+  button:hover {
+    --_p: 100%;
+    transition: background-position .4s, background-size 0s;
+  }
+  button:active {
+    box-shadow: 0 0 9e9q inset #0009; 
+    background-color: var(--c);
+    color: #fff;
+  }
+  
+
+  button {
+    font-family: system-ui, sans-serif;
+    font-size: 3.5rem;
+    cursor: pointer;
+    padding: .1em .6em;
+    font-weight: bold;  
+    border: none;
+  }
+
+  button .return-home-button{
+    text-decoration: none;
+    color: black;
+  }
+
+  button .return-home-button:hover { text-decoration: none;
+    color: black; }
+
+/* i used this webiste to implement the button code https://codepen.io/t_afif/pen/abKyJNJ*/
+
+/* i used this webiste to implement the plane code https://codepen.io/brunab/pen/PgyRMW*/

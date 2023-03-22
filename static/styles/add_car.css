@@ -1,0 +1,126 @@
+@import url(https://fonts.googleapis.com/css?family=Oswald:400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+.sell-cars{
+  background: black;
+  font-family: Open Sans ,sans-serif;
+  line-height:1.5em;
+}
+#contact {
+width: 500px;
+margin:0 auto;
+background:white;
+position: relative;
+}
+#contact::after {
+content: "";
+display: block;
+height: 30px;
+width: 90%;
+left: 5%;
+bottom: 0;
+position: absolute;
+-webkit-box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.19);
+box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.19);
+border-radius: 100%;
+z-index: -1;
+}
+#contact article {
+  padding: 1em;
+}
+#contact h1 {
+background: linear-gradient(107deg, rgb(13, 198, 180) 8.1%, rgb(33, 198, 138) 79.5%);
+font-family: Oswald ,sans-serif;
+font-size: 1.75em;
+padding: 0.6em 0 0.6em 0.4em;
+color: white;
+text-shadow: 0 0.06em 0 #424242;
+position: relative;
+}
+.contactbutton {
+background: linear-gradient(107deg, rgb(13, 198, 180) 8.1%, rgb(33, 198, 138) 79.5%);
+box-shadow: 1px 1px 0 0 #006400 ,2px 2px 0 0 #006400 ,3px 3px 0 0 #006400 ;
+text-align: center;
+display: block;
+width: 100%;
+height: 50px;
+margin-top: 20px;
+margin-bottom: 2px;
+cursor: pointer;
+}
+.contactbutton:hover {
+box-shadow: 1px 1px 0 0 #006400,0px 0px 0 0 #006400,0px 0px 0 0 #006400;
+margin-top: 22px;
+margin-left: 2px;
+margin-bottom: 0px;
+}
+.tick {
+font-size: 25px;
+display: inline-block;
+border-top: 0.5em solid transparent;
+margin-right: 98px;
+height: 0;
+width: 0;
+position: relative;
+color: black;
+}
+#checkcontact{
+position: absolute;
+left: -9999px;
+}
+.contactform {
+overflow: hidden;
+max-height: 0px;
+-webkit-transition: all linear 1s;
+-moz-transition: all linear 1s;
+-o-transition: all linear 1s;
+-ms-transition: all linear 1s;
+transition: all linear 1s;
+}
+#checkcontact:checked + .contactform {
+max-height: 2000px;
+}
+.input_wrapper {
+position: relative;
+}
+.submit_wrapper {
+text-align: center;
+}
+.submit_wrapper input {
+text-align: center;
+display: inline-block;
+width: 40%;
+height: 50px;
+margin-top: 1em;
+margin-bottom: 6px;
+cursor: pointer;
+background: linear-gradient(107deg, rgb(13, 198, 180) 8.1%, rgb(33, 198, 138) 79.5%);
+color: white;
+font-family: Oswald ,sans-serif;
+font-size: 1em;
+border: none;
+box-shadow: 1px 1px 0 0 #006400,2px 2px 0 0 #006400,3px 3px 0 0 #006400;
+-webkit-appearance: none;
+  -webkit-transition: all 250ms ease;
+-moz-transition: all 250ms ease;
+-ms-transition: all 250ms ease;
+-o-transition: all 250ms ease;
+transition: all 250ms ease;
+}
+.submit_wrapper input:hover {
+box-shadow: 1px 1px 0 0 #006400,0px 0px 0 0 #006400,0px 0px 0 0 #006400;
+margin-top: 22px;
+margin-left: 2px;
+margin-bottom: 0px;
+}
+
+@media (max-width: 500px){
+#contact {
+width: 100%;
+}
+  .input_wrapper label {
+line-height: 3.5em;
+font-size: 0.8em;
+}
+}
+
+/*css is taken from https://codepen.io/onediv/pen/AWGZEe*/
