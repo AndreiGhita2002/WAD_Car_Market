@@ -24,7 +24,6 @@ SEARCH_TERMS = {
 }
 
 
-
 @login_required
 def add_car(request):
     if request.method == 'POST':
@@ -76,7 +75,8 @@ def browse(request, args=""):
 
         context_dir['page_title'] = create_title(filter_dict)
         context_dir['form'] = form
-        print(context_dir['carlist'])
+
+        print(f'List of Cars provided by browse(args=\'{args}\'):\n{sorted_cars}')
         return render(request, 'browse.html', context=context_dir)
 
 
