@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
+from accounts.models import UserProfile
 from cars.forms import CarListingForm, CarSearchForm
 from cars.models import Car
 
@@ -84,6 +85,13 @@ def browse(request, args=""):
 
 def car_details(request, car_id):
     car = get_object_or_404(Car, pk=car_id)
+    seller = car.seller
+    print(seller)
+    seller_first_name = seller.first_name
+    print(seller_first_name)
+    seller_last_name = seller.last_name
+    print(seller_last_name)
+    seller_email = seller.email
 
     context_dict = {
         'car': car,
@@ -106,6 +114,9 @@ def car_details(request, car_id):
         'year': car.year,
         'colour': car.colour,
         'related_cars': Car.objects.filter(brand=car.brand).exclude(pk=car.pk)[:4],
+        'seller_first_name': seller_first_name,
+        'seller_last_name': seller_last_name,
+        'seller_email': seller_email,
     }
 
     car.views += 1
