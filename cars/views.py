@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from cars.forms import CarListingForm
+from django.shortcuts import render, get_object_or_404
+
+from cars.forms import CarListingForm, CarSearchForm
 from cars.models import Car
 
 # constant for how many car listings to show per page (maximum)
@@ -15,8 +16,12 @@ SEARCH_TERMS = {
     'num_of_seats': 'exact',
     'fuel_type': 'exact',
     'year': 'exact',
-    'colour': 'exact'
-}  # todo: add price and other stuff
+    'colour': 'exact',
+    'min_price': 'price',
+    'max_price': 'price',
+    'location': 'search'
+}
+
 
 @login_required 
 def add_car(request):
@@ -47,22 +52,28 @@ def browse(request, args=""):
         - if you are looking for the 3rd page of searches, do: args="page:2" (counting starts at 0)
         - all of these requirements can be combined with ',' or with '-'
     """
-    filter_dict = get_filter_dict(args)
-    filtered_cars, context_dir = filter_cars(Car.objects, filter_dict)
+    if request.method == 'POST':
+        form = CarSearchForm(request.POST)
+        pass
+    else:
+        form = CarSearchForm()
+        filter_dict = get_filter_dict(args)
+        filtered_cars, context_dir = filter_cars(Car.objects, filter_dict)
 
-    sorted_cars = filtered_cars.order_by('-views')  # default sort by views
+        sorted_cars = filtered_cars.order_by('-views')  # default sort by views
 
-    if sorted_cars is not None:
-        start = CARS_PER_PAGE * int(filter_dict['page'])
-        end = min(start + CARS_PER_PAGE, sorted_cars.count())
-        sorted_cars = sorted_cars[start:end]  # selecting a CARS_PER_PAGE number of cars
-        context_dir['carlist'] = sorted_cars
+        if sorted_cars is not None:
+            start = CARS_PER_PAGE * int(filter_dict['page'])
+            end = min(start + CARS_PER_PAGE, sorted_cars.count())
+            sorted_cars = sorted_cars[start:end]  # selecting a CARS_PER_PAGE number of cars
+            context_dir['carlist'] = sorted_cars
 
-    if context_dir.get('page', -1) == -1:
-        context_dir['page'] = 0
+        if context_dir.get('page', -1) == -1:
+            context_dir['page'] = 0
 
-    context_dir['page_title'] = create_title(filter_dict)
-    return render(request, 'browse.html', context=context_dir)
+        context_dir['page_title'] = create_title(filter_dict)
+        context_dir['form'] = form
+        return render(request, 'browse.html', context=context_dir)
 
 
 def car_details(request, car_id):

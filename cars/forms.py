@@ -1,4 +1,5 @@
 from django import forms
+
 from .models import Car
 
 
@@ -11,3 +12,10 @@ class CarListingForm(forms.ModelForm):
                            'colour', 'location']
 
         exclude = ['unique_car_id', 'views', 'seller', 'date_posted']
+
+
+class CarSearchForm(forms.Form):
+    title = forms.CharField(max_length=50, help_text='Posting Title', required=False)
+    condition = forms.ChoiceField(choices=Car.CONDITION, required=False)
+    brand = forms.ChoiceField(choices=Car.CAR_BRANDS, required=False)
+    # todo: finish
