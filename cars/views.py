@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
 from cars.forms import CarListingForm, CarSearchForm
@@ -9,17 +10,17 @@ CARS_PER_PAGE = 20
 # constant dict which tells filter_cars() how to search filter the car set
 # depending on what the user searched for
 SEARCH_TERMS = {
-    'title': 'search',
+    'title': 'contains',
     'condition': 'exact',
     'brand': 'exact',
-    'model': 'search',
+    'model': 'contains',
     'num_of_seats': 'exact',
     'fuel_type': 'exact',
     'year': 'exact',
     'colour': 'exact',
     'min_price': 'price',
     'max_price': 'price',
-    'location': 'search'
+    'location': 'contains'
 }
 
 
@@ -54,7 +55,8 @@ def browse(request, args=""):
     """
     if request.method == 'POST':
         form = CarSearchForm(request.POST)
-        pass
+        if form.is_valid():
+            return HttpResponseRedirect('/cars/' + form.get_search_url())
     else:
         form = CarSearchForm()
         filter_dict = get_filter_dict(args)
