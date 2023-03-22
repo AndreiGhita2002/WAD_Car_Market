@@ -1,5 +1,21 @@
 {% extends "base.html" %} {% load static %} {% block title_block %} {{ page_title }} {% endblock %} {% block body_block %}
 <h1>{{ page_title }}</h1>
+
+    <div>
+        <form id="category_form" method="post" action="/cars/">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+            {% endfor %}
+            <input type="submit" name="submit" value="Search" />
+        </form>
+    </div>
+
 <div class="row">
     {% for car in carlist %}
     <div class="col">
