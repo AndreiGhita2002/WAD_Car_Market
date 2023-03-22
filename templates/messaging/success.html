@@ -1,11 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Success</title>
-    </head>
-    <body>
-        <h1>Message Sent</h1>
-        <p>Thank you for contacting the seller.</p>
-    </body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+{% block style_block %}
+    <link rel="stylesheet" type="text/css" href="/static/styles/success_message.css">
+    <link rel="stylesheet" type="text/css" href="/static/styles/base.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block title_block %} Message confirmation {% endblock %}
+
+{% block body_block %}
+{% if user_exist %}
+<div class="body-main">
+    <div class="card-main">
+    <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+      <i class="checkmark">✓</i>
+    </div>
+      <h1 class="success">Success</h1> 
+      <p class="success-message">Your seller has received your email.<br/>They will be in touch shortly!</p>
+      <button><a href="{% url 'home' %}" class="return-home-button">Return Home</a></button>
+    </div>
+</div>
+{% else %}
+<div class="body-main">
+    <div class="card-main">
+    <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+      <i class="error-mark">X</i>
+    </div>
+      <h1 class="error">error</h1> 
+      <p class="error-message">Your seller does not exist in this website<br/>Please try again!</p>
+      <button><a href="{% url 'home' %}" class="return-home-button">Return Home</a></button>
+      <button style="--c:#E95A49"><a href="{% url 'message_seller' %}" class="return-home-button">Contact Seller</a></button>
+    </div>
+</div>
+{% endif %}
+{% endblock body_block %}
+
+<!-- i used this webiste to implement the button code https://codepen.io/warrendunlop/pen/YmVKzm -->
+<!-- i used this webiste to implement the button code https://codepen.io/warrendunlop/pen/YmVKzm -->
+
+

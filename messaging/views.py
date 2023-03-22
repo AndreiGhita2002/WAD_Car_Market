@@ -31,12 +31,8 @@ def message_seller(request):
                 sender_email = email
                 send_mail(subject, message, sender_email, [recipient_email], fail_silently=False,
                           )
-
-            if user_exist:
-                return render(request, 'success.html')
-            else:
-                return render(request, 'index.html')
+            return render(request, 'messaging/success.html', {'user_exist': user_exist})
     else:
         form = MessageForm()
 
-    return render(request, 'message_seller.html', {'form': form})
+    return render(request, 'message_seller.html', {'form': form, 'user_exist': user_exist})
