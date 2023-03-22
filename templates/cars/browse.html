@@ -1,23 +1,18 @@
-{% extends "base.html" %} {% load static %} {% block body_block %} {% block title_block %} Browse {% endblock %} {% block body_block %}
+{% extends "base.html" %} {% load static %} {% block body_block %} {% block title_block %} Browse {% endblock %}
 
-<body class="p-3 m-0 border-0 bd-example">
-    <h1>BROWSE</h1>
-    <div class="row">
-        {% for car in carlist %}
-        <div class="col">
-            <div class="card" style="width: 18rem; margin-top: 10px; margin-bottom: 20px;">
-                {% if car.image %}
-                <img src="{{ car.image.url }}" alt="picture of a car" class="bd-placeholder-img card-img-top" height="200"> {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
-                    <h6 class="card-text">{{ car.price }} </h6>
-                    <h6 class="card-text">{{ car.mileage }}</h6>
-                    <h6 class="card-text">{{ car.location }}</h6>
-                    <a href="#" class="btn btn-primary">Details</a>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
+<h1>BROWSE</h1>
+{% for car in carlist %} {% if car.image %}
+<img src="{{ car.image.url }}" alt="picture of a car" class="bd-placeholder-img card-img-top" height="200"> {% endif %}
+<div class="card-body">
+    <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+    <h6 class="card-text">{{ car.price }} </h6>
+    <h6 class="card-text">{{ car.mileage }}</h6>
+    <h6 class="card-text">{{ car.location }}</h6>
+    <a href="#" class="btn btn-primary">Details</a>
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
 </body>
 {% endblock %}
