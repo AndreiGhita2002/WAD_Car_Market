@@ -134,6 +134,7 @@ def get_filter_dict(filters):
     filter_dict[key] = val
     if filter_dict.get('page', None) is None:
         filter_dict['page'] = '0'
+    print(filter_dict)
     return filter_dict
 
 
@@ -147,7 +148,7 @@ def filter_cars(car_objects, filter_dict):
             if category == 'min_price':
                 min_price = filter_dict.get('min_price')
             elif category == 'max_price':
-                min_price = filter_dict.get('max_price')
+                max_price = filter_dict.get('max_price')
             else:
                 context_dir['car_' + category] = filter_dict[category]
                 instruction = SEARCH_TERMS.get(category, -1)
@@ -156,13 +157,17 @@ def filter_cars(car_objects, filter_dict):
                     filtered_cars = filtered_cars.filter(**{lookup: filter_dict[category]})
                 else:
                     print('[Error] search failed!! check cars/views.filter_cars')
+
+    # setting the page filter
     if filter_dict.get('page', -1) != -1:
         context_dir['page'] = filter_dict['page']
-    # todo: get min and max price filtering working
-    if min_price is not None and type(min_price) == int:
-        filtered_cars = filtered_cars.filter(price__gte=min_price)
-    if max_price is not None and type(max_price) == int:
-        filtered_cars = filtered_cars.filter(price__lte=max_price)
+
+    # filtering by price
+    if min_price is not None:
+        filtered_cars = filtered_cars.filter(price__gte=int(min_price))
+    if max_price is not None:
+        filtered_cars = filtered_cars.filter(price__lte=int(max_price))
+
     return filtered_cars, context_dir
 
 
