@@ -7,46 +7,66 @@
 
 {% block body_block %}
 {% if messages %}
-<div class="alert-warning" alert-{{ message.tags }}  role="aler">
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
 {% for message in messages %}
-  {{message|safe}} - <a href="{% url 'accounts:wishlist' %}" class="alert-link">Your Wishlist</a>. 
+  {{message|safe}} - <a href="{% url 'accounts:wishlist' %}" class="alert-link">Your Wishlist</a>.
 {% endfor %}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 {% endif %}
-    <h1 style="margin-top:40px; margin-left: 320px;">{{ car_title }}</h1>
-    {% if image_url %}
-      <img src="{{ image_url }}" alt="picture of a car" style="width: 800px; margin-bottom: 40px; margin-left: 40px; margin-right: 840px; margin-top: 20px;">
-    {% endif %}
-      <div style="position: absolute; top: 196px; right: 780px;">
-        <h3> Condition: {{ condition }} </h3>
-        <h3> Price: £{{ price }} </h3>
-        <h3> Mileage: {{ mileage }} </h3>
-        <h3> Location: {{ location }} </h3>
-      </div>
 
-        <div style="position: absolute; top: 500px; right: 810px;">
-        <h2>Seller Profile</h2>
-        <p style="margin-top: 20px">Name: {{ seller_first_name }} {{ seller_last_name }}</p>
-        <p>Email: {{ seller_email }}</p>
+<div class="container mt-5" style="margin: 60px">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title">{{ car_title }}</h1>
+      <div class="row g-0">
+        <div class="col-md-8">
+          <div class="card mt-4">
+            <div class="card-body">
+              {% if image_url %}
+                <img src="{{ image_url }}" alt="picture of a car" class="img-fluid mt-4 mb-4" style="border-radius: 10px; border: solid 2px #DFDFDF;">
+              {% endif %}
+              <h4> Condition: {{ condition }} </h4>
+              <h4> Price: £{{ price }} </h4>
+              <h4> Mileage: {{ mileage }} </h4>
+              <h4> Location: {{ location }} </h4>
+              <div class="mt-5">
+                <h3>Seller Profile</h3>
+                <p class="mt-4">Name: {{ seller_first_name }} {{ seller_last_name }}</p>
+                <p>Email: {{ seller_email }}</p>
+                <a href="{% url 'accounts:add_wishlist' carid %}" class="btn btn-primary mt-4" style="font-weight: bold; padding: 10px; background-color: #663FD6; border: none; box-shadow: none;" onmouseover="this.style.boxShadow='0 0 18px 2px rgba(102, 63, 214, 1)'"
+                    onmouseout="this.style.boxShadow='none'">Add to Wishlist</a>
+                <a href="#" class="btn btn-primary mt-4" style="font-weight: bold; padding: 10px; background-color: #663FD6; border: none; box-shadow: none;" onmouseover="this.style.boxShadow='0 0 18px 2px rgba(102, 63, 214, 1)'"
+                    onmouseout="this.style.boxShadow='none'">Message Seller</a>
+              </div>
+            </div>
+          </div>
         </div>
-
-       <div style="margin-left: 40px">
-            <h2>Car Specs</h2>
-                <ul>
-                    <li>Make: {{ brand }}</li>
-                    <li>Model: {{ model }}</li>
-                    <li>Manufacturing Year: {{ year }}</li>
-                    <li>Body Type: {{ body_type }}</li>
-                    <li>Transmission: {{ transmission }}</li>
-                    <li>Fuel Type: {{ fuel_type }}</li>
-                    <li>Exterior Color: {{ colour }}</li>
-                </ul>
-       </div>
-
-      <div style="margin-left: 40px">
-          <h2>Description</h2>
-          <p style="margin-right: 1060px">{{ description }}</p>
+        <div class="col-md-4">
+          <div class="card mt-4">
+            <div class="card-body">
+              <h4 class="card-title">Car Specs</h4>
+              <ul class="list-unstyled">
+                <li>Make: {{ brand }}</li>
+                <li>Model: {{ model }}</li>
+                <li>Manufacturing Year: {{ year }}</li>
+                <li>Body Type: {{ body_type }}</li>
+                <li>Transmission: {{ transmission }}</li>
+                <li>Fuel Type: {{ fuel_type }}</li>
+                <li>Exterior Color: {{ colour }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-      <a href="{% url 'accounts:add_wishlist' carid %}" class="btn btn-light fw500" role="button" aria-disabled="true">ADD TO WISHLIST</a>
-{% endblock %}
+      <div class="card mt-4">
+        <div class="card-body">
+          <h2>Description</h2>
+          <p>{{ description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
+{% endblock %}

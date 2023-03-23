@@ -1,4 +1,5 @@
 from django.http import HttpResponseRedirect, JsonResponse
+from django.urls import reverse
 from django.shortcuts import get_object_or_404, render, redirect
 from accounts.forms import CreateUserForm, UpdateUserProfileForm, UpdateUserForm, UserProfileForm
 from accounts.models import UserProfile
@@ -59,7 +60,7 @@ def mycars(request):
         car_id = request.POST.get('car_id')
         car_to_delete = Car.objects.get(unique_car_id=car_id)
         car_to_delete.delete()
-        return redirect('mycars')
+        return render(request, 'my_cars.html', context)
     return render(request, 'my_cars.html', context)
 
 
