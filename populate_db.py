@@ -53,9 +53,29 @@ def add_user(username, password='', first_name='First', last_name='Last', email=
 
 def populate_cars():
     print('Starting Car population script...')
-    add_car("car 1", description="a nice normal car", brand="tesla", condition="used", seller_id=1)
-    add_car("car 2", description="awful old car", price=400_000, condition="used", year="1995", seller_id=1)
-    add_car("car 3", description="third car", brand="third", condition="new", price=5, year="2020", seller_id=3)
+    # tesla
+    add_car("tesla 1", price=3000, description="A nice tesla car i had lying around.", location='liverpool',
+            brand="tesla", model='model_3', condition="used", num_of_seats=4, body_type='convertible', mileage=700,
+            transmission='automatic', fuel_type='electric', year='2022', colour='blue', seller_id=1)
+    add_car("tesla 2", price=2600, description="A nice tesla car i had lying around.", location='glasgow',
+            brand="tesla", model='model_x', condition="used", num_of_seats=5, body_type='suv', mileage=890,
+            transmission='manual', fuel_type='electric', year='2022', colour='black', seller_id=3)
+    add_car("tesla 3", price=5500, description="I got this as a gift, but I hate Tesla so now im selling it.",
+            location='birmingham', brand="tesla", model='model_y', condition="new", num_of_seats=5, body_type='suv',
+            mileage=0, transmission='automatic', fuel_type='electric', year='2022', colour='grey', seller_id=1)
+    # audi:
+    add_car("audi 1", price=3070, description="I love money.", location='london',
+            brand="audi", model='a3', condition="used", num_of_seats=4, body_type='convertible', mileage=700,
+            transmission='automatic', fuel_type='electric', year='2022', colour='blue', seller_id=1)
+    add_car("audi 2", price=2000, description="A nice audi car i had lying around.", location='london',
+            brand="audi", model='a3', condition="used", num_of_seats=5, body_type='suv', mileage=890,
+            transmission='manual', fuel_type='electric', year='2022', colour='black', seller_id=3)
+    add_car("audi 3", price=5570, description="I got this as a gift, but I hate Audi so now im selling it.",
+            location='birmingham', brand="audi", model='a3', condition="new", num_of_seats=5, body_type='suv',
+            mileage=0, transmission='automatic', fuel_type='electric', year='2022', colour='grey', seller_id=1)
+
+    add_car("awful car", description="awful old car", price=400_000, condition="used", year="1995", seller_id=1)
+    add_car("cheap car", description="third car", brand="third", condition="new", price=5, year="2020", seller_id=3)
     print('... finished Car population script.')
 
 
@@ -70,9 +90,13 @@ def populate_users():
 
 
 def clear_all():
-    pass
+    UserProfile.objects.all().delete()
+    # doesn't work cause of the car_wishlist
+    # >> django.db.utils.OperationalError: no such table: cars_car_user_wishlist
+    # Car.objects.all().delete()
 
 
 if __name__ == '__main__':
+    clear_all()
     populate_users()
     populate_cars()
