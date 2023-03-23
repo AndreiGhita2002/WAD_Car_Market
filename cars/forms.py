@@ -24,8 +24,8 @@ class CarSearchForm(forms.Form):
     COLOURS = tuple([('', 'Colours:')] + list(Car.COLOURS))
     PRICES = [(1000, '1000'), (2000, '2000'), (3000, '3000'), (4000, '4000'), (5000, '5000'),
               (10000, '10000'), (20000, '200000')]
-    MIN_PRICES = tuple([(0, 'Minimum Price:')] + PRICES)
-    MAX_PRICES = tuple([(0, 'Maximum Price:')] + PRICES)
+    MIN_PRICES = tuple([(-1, 'Minimum Price:')] + PRICES)
+    MAX_PRICES = tuple([(-1, 'Maximum Price:')] + PRICES)
 
     title = forms.CharField(max_length=50, help_text='Posting Title', required=False)
     condition = forms.ChoiceField(choices=CONDITIONS, required=False, initial='')
@@ -48,7 +48,7 @@ class CarSearchForm(forms.Form):
         filters = []
         for field in self.fields:
             data = self.cleaned_data.get(field)
-            if data is not None and data != '':
-                filters.append(str(field) + ':' + self.cleaned_data[str(field)])
+            if data is not None and data != '' and int(data) != -1:
+                filters.append(str(field) + ':' + data)
         return '-'.join(filters)
 
