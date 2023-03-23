@@ -1,14 +1,17 @@
 {% extends "base.html" %} {% load static %} {% block title_block %} About - Tron Trader {% endblock %} {% block style_block %} {{ block.super }}
-<link rel="stylesheet" type="text/css" href="{% static 'styles/about.css' %}"> {% endblock %} {% block body_block %}
-<div class="container">
-    <h1>About us</h1>
-    <h2>At Tron Trader, we are dedicated to providing the best platform for buying and selling cars.
-        <br> We are a team of 5 developers and this is our first startup,
-        we are enthusiastic to supply the user with software updates and patches that will improve the users experience!
-        <br> For suggestions or queries, please contact a member of our team through the
-        <a href="{% url 'contact_us' %}">Contact us </a> page
+<link rel="stylesheet" type="text/css" href="{% static 'styles/about.css' %}"> 
+<script src="https://unpkg.com/typed.js@2.0.132/dist/typed.umd.js"></script>
+{% endblock %} 
 
-    </h2>
+{% block body_block %}
+
+<section class="words-transition">
+    <h1>We are <span class="auto-type"></span></h1>
+
+    
 
 </div>
+
+
+<script src="/static/javascript/aboutus.js"></script>
 {% endblock body_block %}
