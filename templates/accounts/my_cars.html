@@ -14,11 +14,11 @@
 
 {% block body_block %}
 {% if cars %}
-<h1 class="display-1">Your cars</h1>
+<h2 class="display-1" style="text-align:center; font-weight: bold;" >Your cars</h2>
 <div class="row">
     {% for car in cars %}
     <div class="col">
-        <div class="card" style="width: 18rem; margin-top: 10px; margin-bottom: 20px;">
+        <div class="card" style="width: 18rem; margin-top: 20px; margin-bottom: 20px;">
             {% if car.image %}
             <img src="{{ car.image.url }}" alt="picture of a car" class="bd-placeholder-img card-img-top" height="200"> {% endif %}
             <div class="card-body">

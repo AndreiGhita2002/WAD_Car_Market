@@ -91,10 +91,10 @@
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
                         <h6 class="text-uppercase mb-4 font-weight-bold">Cars</h6>
                         <p>
-                            <a class="text-white">Sell-Cars</a>
+                            <a class="text-white" href="{% url 'cars:add_car' %}">Sell-Cars</a>
                         </p>
                         <p>
-                            <a class="text-white">Browse-Cars</a>
+                            <a class="text-white" href="{% url 'cars:cars_root' %}">Browse-Cars</a>
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -107,7 +107,7 @@
                             Useful links
                         </h6>
                         <p>
-                            <a class="text-white" href="">Your Account</a> #add account link here
+                            <a class="text-white" href="{% url 'accounts:profile' %}">Your Account</a>
                         </p>
                         <p>
                             <a class="text-white" href="{% url 'about_us' %}">About us </a>
