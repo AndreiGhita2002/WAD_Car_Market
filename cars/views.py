@@ -1,10 +1,7 @@
-import sys
-
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
-from accounts.models import UserProfile
 from cars.forms import CarListingForm, CarSearchForm
 from cars.models import Car
 
@@ -56,15 +53,15 @@ def browse(request, args=""):
         - if you are looking for the 3rd page of searches, do: args="page:2" (counting starts at 0)
         - all of these requirements can be combined with ',' or with '-'
     """
+    filter_dict = get_filter_dict(args)
+    filtered_cars, context_dir = filter_cars(Car.objects, filter_dict)
+
     if request.method == 'POST':
-        form = CarSearchForm(request.POST)
+        form = CarSearchForm(request.POST, initial=filter_dict)
         if form.is_valid():
             return HttpResponseRedirect('/cars/' + form.get_search_url())
     else:
-        form = CarSearchForm()
-        filter_dict = get_filter_dict(args)
-        filtered_cars, context_dir = filter_cars(Car.objects, filter_dict)
-
+        form = CarSearchForm(initial=filter_dict)
         sorted_cars = filtered_cars.order_by('-views')  # default sort by views
 
         if sorted_cars is not None:
@@ -85,13 +82,6 @@ def browse(request, args=""):
 
 def car_details(request, car_id):
     car = get_object_or_404(Car, pk=car_id)
-    seller = car.seller
-    print(seller)
-    seller_first_name = seller.first_name
-    print(seller_first_name)
-    seller_last_name = seller.last_name
-    print(seller_last_name)
-    seller_email = seller.email
 
     context_dict = {
         'car': car,
@@ -114,9 +104,9 @@ def car_details(request, car_id):
         'year': car.year,
         'colour': car.colour,
         'related_cars': Car.objects.filter(brand=car.brand).exclude(pk=car.pk)[:4],
-        'seller_first_name': seller_first_name,
-        'seller_last_name': seller_last_name,
-        'seller_email': seller_email,
+        'seller_first_name': car.seller.first_name,
+        'seller_last_name': car.seller.last_name,
+        'seller_email': car.seller.email,
     }
 
     car.views += 1
