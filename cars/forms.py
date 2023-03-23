@@ -4,7 +4,6 @@ from .models import Car
 
 
 class CarListingForm(forms.ModelForm):
-
     class Meta:
         model = Car
         fields = ['title', 'brand', 'model', 'price', 'condition', 'description', 'image',
@@ -48,7 +47,10 @@ class CarSearchForm(forms.Form):
         filters = []
         for field in self.fields:
             data = self.cleaned_data.get(field)
-            if data is not None and data != '' and int(data) != -1:
+            if str(field) == 'min_price' or str(field) == 'max_price':
+                if int(data) != -1:
+                    filters.append(str(field) + ':' + str(data))
+            elif data is not None and data != '':
                 filters.append(str(field) + ':' + data)
         return '-'.join(filters)
 
