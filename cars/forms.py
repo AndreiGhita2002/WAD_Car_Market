@@ -45,14 +45,10 @@ class CarSearchForm(forms.Form):
     # location = forms.ChoiceField(choices=Car.LOCATIONS, required=False)
 
     def get_search_url(self):
-        print('Forms:')
         filters = []
         for field in self.fields:
-            print(f' field:{field}')
             data = self.cleaned_data.get(field)
-            print(f' -data:{data}')
             if data is not None and data != '':
                 filters.append(str(field) + ':' + self.cleaned_data[str(field)])
-                print(' -returned')
         return '-'.join(filters)
 
