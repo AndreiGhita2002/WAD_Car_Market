@@ -106,6 +106,7 @@ def car_details(request, car_id):
         'colour': car.colour,
         'seller_first_name': car.seller.first_name,
         'seller_last_name': car.seller.last_name,
+        'seller_username': car.seller.username,
         'seller_email': car.seller.email,
     }
 
