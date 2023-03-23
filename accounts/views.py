@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.http import HttpResponseRedirect, JsonResponse
+from django.shortcuts import get_object_or_404, render
 from accounts.forms import CreateUserForm, UpdateUserProfileForm, UpdateUserForm, UserProfileForm
 from accounts.models import UserProfile
 from django.contrib.auth.decorators import login_required
 from cars.models import Car
+from django.contrib import messages
 
 # Create your views here.
 def register(request):
@@ -52,6 +54,29 @@ def mycars(request):
     cars = Car.objects.filter(seller=user)
     context = {'cars':cars, 'user':user }
     return render(request,'my_cars.html',context)
+
+@login_required 
+def add_wishlist(request, car_id):
+    car = get_object_or_404(Car, pk=car_id)
+    user = request.user
+    if car.user_wishlist.filter(username=user).count() < 1:
+        car.user_wishlist.add(user)
+        messages.success(request, "Added " + car.model + " to your wishlist")
+        print(car.user_wishlist.filter(username=user))
+        print(True)
+        
+    else:
+        car.user_wishlist.remove(user)
+        messages.success(request, car.model + " Has been removed from your wishlist")
+        print(car.user_wishlist.filter(username=user))
+        print(False)
+        
+    return HttpResponseRedirect(request.META["HTTP_REFERER"])
+
+@login_required
+def wishlist(request):
+    car = Car.objects.filter(user_wishlist=request.user)
+    return render(request, 'accounts/wishlist.html', {'wishlist':car})
 
     
 

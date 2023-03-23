@@ -11,7 +11,7 @@ class CarListingForm(forms.ModelForm):
                            'num_of_seats', 'body_type', 'mileage', 'transmission', 'fuel_type', 'year',
                            'colour', 'location']
 
-        exclude = ['unique_car_id', 'views', 'seller', 'date_posted']
+        exclude = ['unique_car_id', 'views', 'seller', 'date_posted', 'Wishlist']
 
 
 class CarSearchForm(forms.Form):

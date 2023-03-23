@@ -210,5 +210,7 @@ class Car(models.Model):
     year = models.CharField(max_length=4, choices=YEARS, verbose_name="Year", null=True)
     colour = models.CharField(max_length=6, choices=COLOURS, verbose_name="Colour", null=True)
 
+    user_wishlist = models.ManyToManyField(User, blank=True, related_name="Wishlist")
+
     def __str__(self):
         return "Car:{" + self.title + "," + self.unique_car_id.__str__() + "}"

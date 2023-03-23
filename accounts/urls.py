@@ -18,4 +18,6 @@ urlpatterns = [
     
     path('logout/', auth_views.LogoutView.as_view(template_name='accounts/logout.html'), name='logout'),
     path('mycars', views.mycars, name='mycars'),
+    path('add-wishlist/<int:car_id>', views.add_wishlist, name='add_wishlist'),
+    path('My-wishlist', views.wishlist, name='wishlist'),
 ]

@@ -6,6 +6,13 @@
 {% endblock %}
 
 {% block body_block %}
+{% if messages %}
+<div class="alert-warning" alert-{{ message.tags }}  role="aler">
+{% for message in messages %}
+  {{message|safe}} - <a href="{% url 'accounts:wishlist' %}" class="alert-link">Your Wishlist</a>. 
+{% endfor %}
+</div>
+{% endif %}
     <h1 style="margin-top:40px; margin-left: 320px;">{{ car_title }}</h1>
     {% if image_url %}
       <img src="{{ image_url }}" alt="picture of a car" style="width: 800px; margin-bottom: 40px; margin-left: 40px; margin-right: 840px; margin-top: 20px;">
@@ -40,5 +47,6 @@
           <h2>Description</h2>
           <p style="margin-right: 1060px">{{ description }}</p>
       </div>
+      <a href="{% url 'accounts:add_wishlist' carid %}" class="btn btn-light fw500" role="button" aria-disabled="true">ADD TO WISHLIST</a>
 {% endblock %}
 
