@@ -24,9 +24,9 @@
             <img src="{{ car.image.url }}" alt="picture of a car" class="bd-placeholder-img card-img-top" height="200"> {% endif %}
             <div class="card-body">
                 <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
-                <h6 class="card-text">{{ car.price }} </h6>
-                <h6 class="card-text">{{ car.mileage }}</h6>
-                <h6 class="card-text">{{ car.location }}</h6>
+                <h6 class="card-text">Price: £{{ car.price }} </h6>
+                <h6 class="card-text">Mileage: {{ car.mileage }}</h6>
+                <h6 class="card-text">Location: {{ car.location }}</h6>
                 <a href="{% url 'cars:car_details' car.pk %}" class="btn btn-primary">Details</a>
 
             </div>
