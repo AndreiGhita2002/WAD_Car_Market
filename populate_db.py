@@ -81,11 +81,11 @@ def populate_cars():
 
 def populate_users():
     print('Starting User population script...')
-    add_user('andrei', password='iZi7R98dpyS82bW', first_name='andrei', last_name='ghita', is_staff=True)
-    add_user('big_seller', password='iZi7R98dpyS92bW', first_name='big', last_name='seller')
-    add_user('some_buyer', password='iZi7R98dpyS72bW', first_name='some', last_name='buyer')
+    add_user('andrei', password='iZi7R98dpyS82bW', first_name='andrei', last_name='ghita', is_staff=True, email='andrei@gmail.com')
+    add_user('big_seller', password='iZi7R98dpyS92bW', first_name='big', last_name='seller', email='sellerman@gmail.com')
+    add_user('some_buyer', password='iZi7R98dpyS72bW', first_name='some', last_name='buyer', email='buyerguy@gmail.com')
     add_user('john', password='iZi7R98dpyS62bW', first_name='john', email='john@yahoo.com')
-    add_user('other_staff', password='iZi7R98dpyS52bW', first_name='not', last_name='andrei', is_staff=True)
+    add_user('other_staff', password='iZi7R98dpyS52bW', first_name='not', last_name='andrei', is_staff=True, email='staff@gmail.com')
     print('... which has not been implemented yet')  # remove when you implement this
 
 
