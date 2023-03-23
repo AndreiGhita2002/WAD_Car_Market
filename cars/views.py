@@ -104,7 +104,6 @@ def car_details(request, car_id):
         'fuel_type': car.fuel_type,
         'year': car.year,
         'colour': car.colour,
-        'related_cars': Car.objects.filter(brand=car.brand).exclude(pk=car.pk)[:4],
         'seller_first_name': car.seller.first_name,
         'seller_last_name': car.seller.last_name,
         'seller_email': car.seller.email,
