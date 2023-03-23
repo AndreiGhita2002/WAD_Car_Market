@@ -87,7 +87,7 @@ def car_details(request, car_id):
         'car': car,
         'page_title': f'{car.year} {car.colour} {car.brand} {car.model}',
         'seller': car.seller,
-        'carid' : car.unique_car_id,
+        'carid': car.unique_car_id,
         'car_title': car.title,
         'price': car.price,
         'image_url': car.image.url if car.image else None,
