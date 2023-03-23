@@ -29,12 +29,12 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav mr" style="margin: auto">
+            <div class="navbar-nav mr">
                 <a class="nav-item nav-link active" href="/" style="font-weight: bold; font-size: 20px;">Home </a>
                 <a class="nav-item nav-link active" href="{% url 'cars:cars_root' %}" style="font-weight: bold; font-size: 20px;">Browse</a>
                 <a class="nav-item nav-link active" href="{% url 'contact_us' %}" style="font-weight: bold; font-size: 20px;">Contact</a>
                 <a class="nav-item nav-link active" href="{% url 'about_us' %}" style="font-weight: bold; font-size: 20px;">About</a> {% if user.is_authenticated %}
-                <a class="btn btn-primary" href="/cars/sell" role="button" style="font-weight: bold; padding: 10px; margin-left: 1140px; margin-top: 4px; background-color: #663FD6; border: none; box-shadow: none;" onmouseover="this.style.boxShadow='0 0 18px 2px rgba(102, 63, 214, 1)'"
+                <a class="btn btn-primary" href="/cars/sell" role="button" style="font-weight: bold; padding: 10px; background-color: #663FD6; border: none; box-shadow: none;" onmouseover="this.style.boxShadow='0 0 18px 2px rgba(102, 63, 214, 1)'"
                     onmouseout="this.style.boxShadow='none'"> + Sell Car</a> {% endif %}
             </div>
             <div class="navbar-nav ml-auto">
