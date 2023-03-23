@@ -1,6 +1,6 @@
 asgiref==3.6.0
 beautifulsoup4==4.12.0
-certifi @ file:///C:/b/abs_85o_6fm0se/croot/certifi_1671487778835/work/certifi
+# certifi @ file:///C:/b/abs_85o_6fm0se/croot/certifi_1671487778835/work/certifi
 Django==4.1.7
 django-bootstrap4==22.3
 django-crispy-forms==2.0
