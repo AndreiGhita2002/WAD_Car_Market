@@ -23,7 +23,7 @@
 
 <body>
     {% block header_block %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #282435 !important;">
         <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static '/images/tron_trader.PNG' %}" class="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -34,7 +34,8 @@
                 <a class="nav-item nav-link active" href="{% url 'cars:cars_root' %}">Browse cars</a>
                 <a class="nav-item nav-link active" href="{% url 'contact_us' %}">Contact us</a>
                 <a class="nav-item nav-link active" href="{% url 'about_us' %}">About us</a> {% if user.is_authenticated %}
-                <a class="btn btn-primary" href="/cars/sell" role="button"> + Sell Car</a> {% endif %}
+                <a class="btn btn-primary" href="/cars/sell" role="button" style="font-weight: bold; padding: 10px; margin-left: 1140px; margin-top: 4px; background-color: #663FD6; border: none; box-shadow: none;" onmouseover="this.style.boxShadow='0 0 18px 2px rgba(102, 63, 214, 1)'"
+                    onmouseout="this.style.boxShadow='none'"> + Sell Car</a> {% endif %}
             </div>
             <div class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
@@ -67,7 +68,7 @@
     </div>
 
     {% block footer_block %}
-    <footer class="text-center text-lg-start text-white">
+    <footer class="text-center text-lg-start text-white" style="background-color: #282435;">
         <!-- Grid container -->
         <div class="container p-4 pb-0">
             <!-- Section: Links -->
