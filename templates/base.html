@@ -45,8 +45,9 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'accounts:profile' %}"><img src="{% static '/images/edit-picture-img.jpg' %}" class="sub-class-profile"> Profile</a>
                         <a class="dropdown-item" href="{% url 'accounts:settings' %}"><img src="{% static '/images/settings.webp' %}" class="sub-class-profile">Settings</a>
+                        <a class="dropdown-item" href="{% url 'accounts:mycars' %}"><img src="{% static '/images/tag.png' %}" class="sub-class-profile">My cars</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'accounts:logout' %}"><img src="{% static '/images/logout.png' %}" class="sub-class-profile">Logout</a>
+                        <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
                     </div>
 
                 </li>

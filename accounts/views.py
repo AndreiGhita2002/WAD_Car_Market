@@ -2,6 +2,7 @@ from django.shortcuts import render
 from accounts.forms import CreateUserForm, UpdateUserProfileForm, UpdateUserForm, UserProfileForm
 from accounts.models import UserProfile
 from django.contrib.auth.decorators import login_required
+from cars.models import Car
 
 # Create your views here.
 def register(request):
@@ -43,4 +44,14 @@ def profile(request):
     
     context = {'profile_form': profile_form, 'user_form': user_form, 'picture_form':picture_form}
     return render(request, 'accounts/profile.html', context)
+
+
+@login_required  
+def mycars(request):
+    user = request.user
+    cars = Car.objects.filter(seller=user)
+    context = {'cars':cars, 'user':user }
+    return render(request,'my_cars.html',context)
+
+    
 

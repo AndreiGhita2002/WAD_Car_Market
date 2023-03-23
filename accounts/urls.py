@@ -17,5 +17,5 @@ urlpatterns = [
                                                             success_url=reverse_lazy('accounts:profile')), name='settings'),
     
     path('logout/', auth_views.LogoutView.as_view(template_name='accounts/logout.html'), name='logout'),
-    
+    path('mycars', views.mycars, name='mycars'),
 ]
