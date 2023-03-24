@@ -35,11 +35,8 @@ SECRET_KEY = '61m-y4u%&u*^gmr2q1tz$pyiczuxvik2&(muht-+nf8a7#1$$#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
-
-=======
 ALLOWED_HOSTS = ['andreighita.pythonanywhere.com',"127.0.0.1"]
->>>>>>> f14890fa73cc5b13f2a4a545486b6304e77705ea
+
 
 # Application definition
 
