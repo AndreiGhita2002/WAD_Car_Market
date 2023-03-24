@@ -1,121 +1,110 @@
-{% extends "base.html" %}
-{% load static %} <!--newly added-->
+{% extends "base.html" %} {% load static %}
+<!--newly added-->
 
 
-{% block style_block %}
-{{ block.super }}
-    <link rel="stylesheet" type="text/css" href="/static/styles/index.css">
-    <link rel="stylesheet" type="text/css" href="/static/styles/brands.css">
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-{% endblock %}
-
-{% block body_block %}
-    <section class="Background-image">
-        <div class="brand-container">
-  <h2 class="brand-header">Browse by brand</h2>
-  <a href="/cars/brand:audi">
-  <div class="brand-item">
-    <img src="static/images/audilogo.png" alt="Audi logo">
-    <p>Audi</p>
-  </div>
-  </a>
-  <a href="/cars/brand:bmw">
-  <div class="brand-item">
-    <img src="static/images/bmwlogo.png" alt="Bmw logo">
-    <p>BMW</p>
-  </div>
-  </a>
-  <a href="/cars/brand:ford">
-  <div class="brand-item">
-    <img src="static/images/fordlogo.png" alt="Ford logo">
-    <p>Ford</p>
-  </div>
-  </a>
-  <a href="/cars/brand:mercedes_benz">
-  <div class="brand-item">
-    <img src="static/images/benzlogo.png" alt="Benz logo">
-    <p>Benz</p>
-  </div>
-  </a>
-</div>
-
-    </section>
-    
-    <section class="show-browse-cars">
-       <div class="container">
-            <div class="content">
-                <div class="car-image">
-                    <img src="{% static '/images/background_image_2.jpg' %}">
-                </div>
-                <div class="text-browse-car">
-                    <h3>Just for you</h3>
-                    <p> Offering a wide variety of cars with competitive prices, including offers
-                        from second hand sellers. Filter based on your preference and find your dream car now!
-                    </p>
-                    <a href="{% url 'cars:cars_root' %}"><button class="button-36" role="button">Browse Cars Now</button></a>
-                </div>
+{% block style_block %} {{ block.super }}
+<link rel="stylesheet" type="text/css" href="/static/styles/index.css">
+<link rel="stylesheet" type="text/css" href="/static/styles/brands.css">
+<script src="https://unpkg.com/scrollreveal"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"> {% endblock %} {% block body_block %}
+<section class="Background-image">
+    <div class="brand-container">
+        <h2 class="brand-header">Browse by brand</h2>
+        <a href="/cars/brand:audi">
+            <div class="brand-item">
+                <img src="static/images/audilogo.png" alt="Audi logo">
+                <p>Audi</p>
             </div>
-       </div>
-    </section>
+        </a>
+        <a href="/cars/brand:bmw">
+            <div class="brand-item">
+                <img src="static/images/bmwlogo.png" alt="Bmw logo">
+                <p>BMW</p>
+            </div>
+        </a>
+        <a href="/cars/brand:ford">
+            <div class="brand-item">
+                <img src="static/images/fordlogo.png" alt="Ford logo">
+                <p>Ford</p>
+            </div>
+        </a>
+        <a href="/cars/brand:mercedes_benz">
+            <div class="brand-item">
+                <img src="static/images/benzlogo.png" alt="Benz logo">
+                <p>Benz</p>
+            </div>
+        </a>
+        <button class="show-all-brands-btn"> + Show all brands</button>
+    </div>
 
-    <section class="show-browse-cars">
-        <div class="container">
-            <div class="content">
-                <div class="car-image">
-                    <img src="{% static '/images/sell_car_website.jpg' %}">
-                </div>
-                <div class="text-browse-car">
-                    <h3>Sell your own</h3>
-                    <p> Sell any almost type of legally registered automobile to other users.
-                        The best part: no hidden fees!
-                    </p>
-                    <a href="{% url 'cars:add_car' %}"><button class="button-36" role="button">Sell Cars Now</button></a>
-                </div>
+</section>
+
+<section class="show-browse-cars">
+    <div class="container">
+        <div class="content">
+            <div class="car-image">
+                <img src="{% static '/images/background_image_2.jpg' %}">
+            </div>
+            <div class="text-browse-car">
+                <h3>Just for you</h3>
+                <p> Offering a wide variety of cars with competitive prices, including offers from second hand sellers. Filter based on your preference and find your dream car now!
+                </p>
+                <button class="button-36" role="button"><a href="{% url 'cars:cars_search' args='your_search_query' %}"> Browse Cars Now</a></button>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="show-browse-cars">
-        <div class="container">
-            <div class="content">
-                <div class="car-image">
-                    <img src="{% static '/images/register-now-pic.jpg' %}">
-                </div>
-                <div class="text-browse-car">
-                    <h3>Register now!</h3>
-                    <p> Resister, or login to get the most out of our services!
-                        Negotiate with sellers for the best price, or put a listing of your own vehicles.
-                    </p>
-                    <a href="{% url 'accounts:register' %}"><button class="button-36" role="button"> Register Now</button></a>
-                </div>
+<section class="show-browse-cars">
+    <div class="container">
+        <div class="content">
+            <div class="car-image">
+                <img src="{% static '/images/sell_car_website.jpg' %}">
+            </div>
+            <div class="text-browse-car">
+                <h3>Sell your own</h3>
+                <p> Sell any almost type of legally registered automobile to other users. The best part: no hidden fees!
+                </p>
+                <button class="button-36" role="button"><a href="{% url 'cars:add_car' %}"> Sell Cars Now</a></button>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="show-browse-cars">
-        <div class="container">
-            <div class="content">
-                <div class="car-image">
-                    <img src="{% static '/images/contact-us.jpg' %}">
-                </div>
-                <div class="text-browse-car">
-                    <h3>Contact Us!</h3>
-                    <p> Follow our socials to get the latest car news and details.
-                        We would be delighted to help you with any problems!
-                        For enquiries click below:
-
-                    </p>
-                    <a href="{% url 'contact_us' %}"><button class="button-36" role="button"> Contact us</button></a>
-                </div>
+<section class="show-browse-cars">
+    <div class="container">
+        <div class="content">
+            <div class="car-image">
+                <img src="{% static '/images/register-now-pic.jpg' %}">
+            </div>
+            <div class="text-browse-car">
+                <h3>Register now!</h3>
+                <p> Resister, or login to get the most out of our services! Negotiate with sellers for the best price, or put a listing of your own vehicles.
+                </p>
+                <button class="button-36" role="button"><a href="{% url 'accounts:register' %}"> Register Now</a></button>
             </div>
         </div>
-    </section>
-    <script src="/static/javascript/index.js"></script>
+    </div>
+</section>
+
+<section class="show-browse-cars">
+    <div class="container">
+        <div class="content">
+            <div class="car-image">
+                <img src="{% static '/images/contact-us.jpg' %}">
+            </div>
+            <div class="text-browse-car">
+                <h3>Contact Us!</h3>
+                <p> Follow our socials to get the latest car news and details. We would be delighted to help you with any problems! For enquiries click below:
+
+                </p>
+                <button class="button-36" role="button"><a href="{% url 'contact_us' %}"> Contact us</a></button>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="/static/javascript/index.js"></script>
 {% endblock body_block %}
 
 <!-- This code has been referenced from https://www.youtube.com/watch?v=Zwa5z9Ws7y4&t=1254s-->
 <!-- button code has been taken from https://getcssscan.com/css-buttons-examples-->
-
-
-

@@ -33,10 +33,11 @@
               <div class="mt-5">
                 <h3>Seller Profile</h3>
                 <p class="mt-4">Name: {{ seller_first_name }} {{ seller_last_name }}</p>
+                <p>username: {{ seller_username }}</p>
                 <p>Email: {{ seller_email }}</p>
                 <a href="{% url 'accounts:add_wishlist' carid %}" class="btn btn-primary mt-4" style="font-weight: bold; padding: 10px; background-color: #663FD6; border: none; box-shadow: none;" onmouseover="this.style.boxShadow='0 0 18px 2px rgba(102, 63, 214, 1)'"
                     onmouseout="this.style.boxShadow='none'">Add to Wishlist</a>
-                <a href="#" class="btn btn-primary mt-4" style="font-weight: bold; padding: 10px; background-color: #663FD6; border: none; box-shadow: none;" onmouseover="this.style.boxShadow='0 0 18px 2px rgba(102, 63, 214, 1)'"
+                <a href="{% url 'messaging:message_seller' %}" class="btn btn-primary mt-4" style="font-weight: bold; padding: 10px; background-color: #663FD6; border: none; box-shadow: none;" onmouseover="this.style.boxShadow='0 0 18px 2px rgba(102, 63, 214, 1)'"
                     onmouseout="this.style.boxShadow='none'">Message Seller</a>
               </div>
             </div>
@@ -68,5 +69,4 @@
     </div>
   </div>
 </div>
-
 {% endblock %}
