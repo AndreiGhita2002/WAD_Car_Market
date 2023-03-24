@@ -4,15 +4,16 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE',
                       'WAD_Car_Market.settings')
 
 import django
+
 django.setup()
 from cars.models import Car
 from accounts.models import UserProfile
 from django.contrib.auth.models import User
 
 
-def add_car(title, price=1000, description="", location="glasgow", brand="brand", model="default model", condition="new",
-            num_of_seats=5, body_type="default body", mileage=500, transmission="gears", fuel_type="gas", year="2023",
-            colour="blue", seller_id=0,image="static/images/default_car"): #remove image if anything breaks
+def add_car(title, price=1000, description="", location="glasgow", brand="brand", model="default model",
+            condition="new", num_of_seats=5, body_type="default body", mileage=500, transmission="gears",
+            fuel_type="gas", year="2023", colour="blue", seller_id=0, image_path="/car-icon.jpg"):
 
     new_car = Car.objects.get_or_create(title=title)[0]
     new_car.price = price
@@ -28,9 +29,7 @@ def add_car(title, price=1000, description="", location="glasgow", brand="brand"
     new_car.fuel_type = fuel_type
     new_car.year = year
     new_car.colour = colour
-
-    new_car.image = image #remove if anything breaks
-
+    new_car.image.name = image_path
     new_car.seller = UserProfile.objects.get(user_id=seller_id).user
     new_car.save()
     print(f" [new car] {new_car.title}: {new_car.description}")
@@ -85,11 +84,14 @@ def populate_cars():
 
 def populate_users():
     print('Starting User population script...')
-    add_user('andrei', password='iZi7R98dpyS82bW', first_name='andrei', last_name='ghita', is_staff=True, email='andrei@gmail.com')
-    add_user('big_seller', password='iZi7R98dpyS92bW', first_name='big', last_name='seller', email='sellerman@gmail.com')
+    add_user('andrei', password='iZi7R98dpyS82bW', first_name='andrei', last_name='ghita', is_staff=True,
+             email='andrei@gmail.com')
+    add_user('big_seller', password='iZi7R98dpyS92bW', first_name='big', last_name='seller',
+             email='sellerman@gmail.com')
     add_user('some_buyer', password='iZi7R98dpyS72bW', first_name='some', last_name='buyer', email='buyerguy@gmail.com')
     add_user('john', password='iZi7R98dpyS62bW', first_name='john', email='john@yahoo.com')
-    add_user('other_staff', password='iZi7R98dpyS52bW', first_name='not', last_name='andrei', is_staff=True, email='staff@gmail.com')
+    add_user('other_staff', password='iZi7R98dpyS52bW', first_name='not', last_name='andrei', is_staff=True,
+             email='staff@gmail.com')
     print('... which has not been implemented yet')  # remove when you implement this
 
 
