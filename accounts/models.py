@@ -14,5 +14,5 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
     
-
+#user model is taken from django mode, Userprofile is connected to the actual user model.
     

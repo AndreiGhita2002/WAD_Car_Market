@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from .forms import MessageForm
 from django.contrib.auth.decorators import login_required
 
+
+#This is to message sellers, this uses the django send mail function. It redirects users if succesful to a succesful page.
 @login_required
 def message_seller(request):
     user_exist = False
