@@ -1,24 +1,17 @@
 {% extends "base.html" %} {% load static %} {% block title_block %} {{ page_title }} {% endblock %} {% block body_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/browse.css' %}">
 <h1>{{ page_title }}</h1>
 
-    <div>
-        <form id="category_form" method="post" action="/cars/">
-            {% csrf_token %}
-            {% for hidden in form.hidden_fields %}
-                {{ hidden }}
-            {% endfor %}
-            {% for field in form.visible_fields %}
-                {{ field.errors }}
-                {{ field.help_text }}
-                {{ field }}
-            {% endfor %}
-            <input type="submit" name="submit" value="Search" />
-        </form>
-    </div>
-
-<div class="row">
+<div>
+    <form id="category_form" method="post" action="/cars/">
+        {% csrf_token %} {% for hidden in form.hidden_fields %} {{ hidden }} {% endfor %} {% for field in form.visible_fields %} {{ field.errors }} {{ field.help_text }} {{ field }} {% endfor %}
+        <input type="submit" name="submit" value="Search" />
+    </form>
+</div>
+{% if carlist %}
+<div class="browse-row">
     {% for car in carlist %}
-    <div class="col">
+    <div class="col card-col">
         <div class="card" style="width: 18rem; margin-top: 10px; margin-bottom: 20px;">
             {% if car.image %}
             <img src="{{ car.image.url }}" alt="picture of a car" class="bd-placeholder-img card-img-top" height="200"> {% endif %}
@@ -34,4 +27,15 @@
     </div>
     {% endfor %}
 </div>
-{% endblock %}
+{% else %}
+<div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="text-center">
+        <h1 class="display-1 fw-bold">No such car</h1>
+        <p class="fs-3"> <span class="text-danger">Opps!</span>No such car exist</p>
+        <p class="lead color-white">
+            we are very sorry for this inconvenience!
+        </p>
+        <a href="{% url 'home' %}" class="btn btn-primary">Home</a>
+    </div>
+</div>
+{%endif%} {% endblock %}
