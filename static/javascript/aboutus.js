@@ -45,11 +45,6 @@ else{
 document.getElementById("prev").addEventListener("click", backward);
 
 
-
-
-
-
-
 var typedWords = new Typed(".hello-auto", {
     strings: ["Hello!", "Bonjour!", "Hola!", "Konnichiwa!","Selamat"],
     typeSpeed : 100,
@@ -63,4 +58,3 @@ var typedWordsHello = new Typed(".auto-type", {
     backSpeed : 90,
     loop: true
 })
-

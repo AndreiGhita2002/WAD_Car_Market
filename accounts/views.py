@@ -1,5 +1,4 @@
-from django.http import HttpResponseRedirect, JsonResponse
-from django.urls import reverse
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from accounts.forms import CreateUserForm, UpdateUserProfileForm, UpdateUserForm, UserProfileForm
 from accounts.models import UserProfile
@@ -9,6 +8,8 @@ from django.contrib import messages
 
 
 # Create your views here.
+
+#For user to register in, the form and a boolean is passed to the template
 def register(request):
     registered = False
     if request.method == 'POST':
@@ -29,6 +30,7 @@ def register(request):
     return render(request, 'accounts/register.html', context={'user_form': user_form, 'registered': registered})
 
 
+#This is the user profile where they can edit their profile, a login decorator is used to only allow authenticated user to view such page
 @login_required
 def profile(request):
     user_profile = request.user.userprofile
@@ -50,7 +52,7 @@ def profile(request):
     context = {'profile_form': profile_form, 'user_form': user_form, 'picture_form': picture_form}
     return render(request, 'accounts/profile.html', context)
 
-
+#This is the page where sellers can view the car they are currently selling
 @login_required
 def mycars(request):
     user = request.user
@@ -63,7 +65,7 @@ def mycars(request):
         return render(request, 'my_cars.html', context)
     return render(request, 'my_cars.html', context)
 
-
+#This is the user wishlist, where they can add or remove their cars to the wishlist.Note this is just the functionality
 @login_required
 def add_wishlist(request, car_id):
     car = get_object_or_404(Car, pk=car_id)
@@ -80,9 +82,9 @@ def add_wishlist(request, car_id):
         print(car.user_wishlist.filter(username=user))
         print(False)
 
-    return HttpResponseRedirect(request.META["HTTP_REFERER"])
+    return HttpResponseRedirect(request.META.get("HTTP_REFERER", ""))
 
-
+#This is the actual wishlist page
 @login_required
 def wishlist(request):
     car = Car.objects.filter(user_wishlist=request.user)

@@ -2,7 +2,7 @@ from django import forms
 
 from .models import Car
 
-
+#The form to let user sell the cars
 class CarListingForm(forms.ModelForm):
     class Meta:
         model = Car

@@ -38,7 +38,6 @@
     <p>Benz</p>
   </div>
   </a>
-  <button class="show-all-brands-btn"> + Show all brands</button>
 </div>
 
     </section>
@@ -54,7 +53,7 @@
                     <p> Offering a wide variety of cars with competitive prices, including offers
                         from second hand sellers. Filter based on your preference and find your dream car now!
                     </p>
-                    <button class="button-36" role="button"><a href="#"> Browse Cars Now</a></button>
+                    <a href="{% url 'cars:cars_root' %}"><button class="button-36" role="button">Browse Cars Now</button></a>
                 </div>
             </div>
        </div>
@@ -71,7 +70,7 @@
                     <p> Sell any almost type of legally registered automobile to other users.
                         The best part: no hidden fees!
                     </p>
-                    <button class="button-36" role="button"><a href="#"> Sell Cars Now</a></button>
+                    <a href="{% url 'cars:add_car' %}"><button class="button-36" role="button">Sell Cars Now</button></a>
                 </div>
             </div>
         </div>
@@ -88,7 +87,7 @@
                     <p> Resister, or login to get the most out of our services!
                         Negotiate with sellers for the best price, or put a listing of your own vehicles.
                     </p>
-                    <button class="button-36" role="button"><a href="#"> Register Now</a></button>
+                    <a href="{% url 'accounts:register' %}"><button class="button-36" role="button"> Register Now</button></a>
                 </div>
             </div>
         </div>
@@ -107,7 +106,7 @@
                         For enquiries click below:
 
                     </p>
-                    <button class="button-36" role="button"><a href="{% url 'contact_us' %}"> Contact us</a></button>
+                    <a href="{% url 'contact_us' %}"><button class="button-36" role="button"> Contact us</button></a>
                 </div>
             </div>
         </div>

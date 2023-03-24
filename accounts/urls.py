@@ -23,3 +23,5 @@ urlpatterns = [
     path('add-wishlist/<int:car_id>', views.add_wishlist, name='add_wishlist'),
     path('My-wishlist', views.wishlist, name='wishlist'),
 ]
+
+#Some urls are using django built in views, those views are diffrentiated by having auth_views infront of them
