@@ -12,7 +12,8 @@ from django.contrib.auth.models import User
 
 def add_car(title, price=1000, description="", location="glasgow", brand="brand", model="default model", condition="new",
             num_of_seats=5, body_type="default body", mileage=500, transmission="gears", fuel_type="gas", year="2023",
-            colour="blue", seller_id=0):
+            colour="blue", seller_id=0,image="static/images/default_car"): #remove image if anything breaks
+
     new_car = Car.objects.get_or_create(title=title)[0]
     new_car.price = price
     new_car.description = description
@@ -27,6 +28,9 @@ def add_car(title, price=1000, description="", location="glasgow", brand="brand"
     new_car.fuel_type = fuel_type
     new_car.year = year
     new_car.colour = colour
+
+    new_car.image = image #remove if anything breaks
+
     new_car.seller = UserProfile.objects.get(user_id=seller_id).user
     new_car.save()
     print(f" [new car] {new_car.title}: {new_car.description}")
